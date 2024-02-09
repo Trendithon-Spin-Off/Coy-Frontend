@@ -1,0 +1,52 @@
+.Header {
+  height: 90px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 2px 4px 0 rgb(19, 24, 48, 0.15);
+  /* padding: 0 120px; */
+  padding: 0 7vw;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  /* font-size: 20px; */
+  font-size: 1.2em;
+  /* gap: 30px; */
+  gap: 2vw;
+  align-items: center;
+}
+
+.search-bar {
+  /* width: 280px; */
+  width: 16.5vw;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  border: 0.5px solid rgb(98, 112, 134);
+  border-radius: 52px;
+
+  padding: 0 1.5vw;
+  gap: 15px;
+}
+
+.search-bar img {
+  height: 25px;
+}
+
+.search-text {
+  width: 80%;
+  border: none;
+  outline: none;
+  font-family: "Pretendard-Regular";
+  font-size: 0.8em;
+}
+
+.user-bar {
+  display: flex;
+}
