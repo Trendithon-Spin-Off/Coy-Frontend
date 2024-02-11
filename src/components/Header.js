@@ -5,13 +5,10 @@ import "../styles/Header.css";
 import search from "../img/search.png";
 
 function Header() {
-  const [searchData, setSearchData] = useState({
-    content: "",
-  });
+  const [searchData, setSearchData] = useState("");
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSearchData({ ...searchData, [name]: value });
+    setSearchData(e.target.value);
   };
 
   const navigate = useNavigate();
@@ -36,6 +33,18 @@ function Header() {
     navigate("/register");
   };
 
+  const handleSearch = () => {
+    if (searchData.trim() !== "") {
+      navigate(`/search/project/${searchData.trim()}`); // 검색어를 trim하여 공백을 제거하고 검색합니다.
+    }
+  };
+
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <div className="Header">
       <div className="header-left">
@@ -51,8 +60,8 @@ function Header() {
       </div>
       <div className="header-right">
         <div className="search-bar">
-          <img src={search} alt="검색 이미지" />
-          <input className="search-text" type="text" name="content" onChange={handleInputChange} placeholder="새로운 인사이트를 검색해보세요" />
+          <img src={search} alt="검색 이미지" onClick={handleSearch} style={{ cursor: "pointer" }} />
+          <input className="search-text" type="text" value={searchData} onChange={handleInputChange} onKeyPress={handleOnKeyPress} placeholder="새로운 인사이트를 검색해보세요" />
         </div>
         <div className="user-bar">
           <p onClick={handleLoginLink} style={{ cursor: "pointer" }}>

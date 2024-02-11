@@ -1,0 +1,47 @@
+.Search-text {
+  padding: 90px 0;
+  text-align: center;
+}
+
+.Search-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.Search-sub {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #898989;
+}
+
+.Search-content {
+  margin: 0 120px;
+  margin-bottom: 60px;
+}
+
+.Search-bar {
+  display: flex;
+  gap: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Search-bar-recruit-1 {
+  color: #bdc7d5;
+}
+
+.Search-list {
+  margin-top: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Search-list-cards {
+  width: 100%;
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 285px);
+}
