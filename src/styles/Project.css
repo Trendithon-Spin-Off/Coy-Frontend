@@ -1,0 +1,137 @@
+.Banner {
+  width: 100vw;
+  height: 344px;
+  background-color: #d9d9d9;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.Banner-sub {
+  font-size: 24px;
+  font-weight: bold;
+  color: #627086;
+
+  margin-bottom: 10px;
+}
+
+.Banner-title {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.Burning {
+  width: 100vw;
+  height: 368px;
+  background-color: #f0f1f5;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+}
+
+.Burning-content {
+  margin: 0 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Burning-title {
+  font-size: 32px;
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+.Burning-sub {
+  font-size: 16px;
+  color: #627086;
+}
+
+.Burning-card-list {
+  max-width: calc(100vw - 240px -320px);
+  overflow: hidden;
+}
+
+.Burning-list {
+  display: flex;
+  gap: 15px;
+}
+
+.Project-list {
+  padding: 60px 0;
+}
+
+.Project-content {
+  margin: 0 120px;
+}
+
+.Project-title {
+  font-size: 32px;
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+.Project-bar {
+  margin-bottom: 25px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Project-cards {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Project-cards-list {
+  width: 100%;
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 285px);
+}
+
+.Project-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 170px;
+  height: 50px;
+
+  border: 1px solid #439aff;
+  border-radius: 45px;
+  background-color: white;
+  color: #439aff;
+  font-size: 16px;
+
+  transition: 400ms ease-in-out;
+}
+
+.Project-btn img {
+  height: 17px;
+  margin-right: 5px;
+  transition: 400ms ease-in-out;
+}
+
+.Project-btn:hover {
+  transition: 400ms ease-in-out;
+  border: 1px solid #94c7ff;
+  background-color: #94c7ff;
+  color: white;
+}
+
+.Project-btn:hover img {
+  transition: 400ms ease-in-out;
+  filter: brightness(0) invert(1);
+}
