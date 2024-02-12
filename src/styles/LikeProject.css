@@ -1,0 +1,36 @@
+.Like-content {
+  margin: 70px 120px 60px 120px;
+}
+
+.Like-Title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.Like-bar {
+  display: flex;
+  gap: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Like-bar-recruit-1 {
+  color: #bdc7d5;
+}
+
+.Like-list {
+  margin-top: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Like-list-cards {
+  width: 100%;
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 285px);
+}

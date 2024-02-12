@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
@@ -36,8 +37,8 @@ function App() {
           <Route exact path="/like/recruitment" element={<LikeRecruitment />} />
 
           {/* 검색한 프로젝트, 채용 공고 */}
-          <Route exact path="/search/project" element={<SearchProject />} />
-          <Route exact path="/search/recruitment" element={<SearchRecruitment />} />
+          <Route exact path="/search/project/:searchData" element={<SearchProject />} />
+          <Route exact path="/search/recruitment/:searchData" element={<SearchRecruitment />} />
 
           {/* 프로젝트 */}
           <Route exact path="/project" element={<Project />} />
