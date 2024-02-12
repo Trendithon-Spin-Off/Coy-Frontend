@@ -58,6 +58,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .Profile-mypage-img .upload-label img {
@@ -70,10 +71,21 @@
   width: 140px;
   border-radius: 140px;
   object-fit: cover;
+
+  z-index: 5;
 }
 
 #file-preview {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.Profile-mypage-preview-img {
+  height: 140px;
+  width: 140px;
+  filter: brightness(40%);
+
+  position: relative;
+  z-index: 1;
 }

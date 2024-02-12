@@ -5,6 +5,7 @@ import "../styles/Card_Profile_Project.css";
 import Look from "../img/see.png";
 import Like from "../img/like.png";
 import Arrow from "../img/arrow.png";
+import Default from "../img/NonProject.png";
 
 function Card_Profile_Project() {
   const navigate = useNavigate();
@@ -15,7 +16,9 @@ function Card_Profile_Project() {
 
   return (
     <div className="Card-Profile-Project" onClick={handleToProjectLink} style={{ cursor: "pointer" }}>
-      <div className="Card-Profile-Project-img"></div>
+      <div className="Card-Profile-Project-img">
+        <img src={Default} alt="프로젝트 이미지" />
+      </div>
       <div className="Card-Profile-Project-content">
         <div className="Card-Project-common">
           <div className="Card-Project-content-texts">

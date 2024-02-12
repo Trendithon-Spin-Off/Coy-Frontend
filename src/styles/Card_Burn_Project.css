@@ -1,7 +1,7 @@
 .Card-Burn-Project {
   width: 285px;
   height: 240px;
-  background-color: rgb(25, 25, 25, 0.7);
+  background-color: #191919;
   border-radius: 12px;
 }
 
@@ -47,6 +47,7 @@
 }
 
 .Card-Burn-Project-common {
+  margin-top: -240px;
   padding: 25px;
 
   height: calc(100% - 50px);
@@ -54,6 +55,9 @@
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 400ms ease-in-out;
+
+  position: relative;
+  z-index: 10;
 }
 
 .Card-Burn-Project-hover {
@@ -67,6 +71,9 @@
   margin-top: calc(-83%);
   opacity: 0;
   transition: opacity 400ms ease-in-out;
+
+  position: relative;
+  z-index: 10;
 }
 
 .to-Burn-project-btn {
@@ -98,4 +105,26 @@
 
 .Card-Burn-Project:hover .Card-Burn-Project-hover {
   opacity: 1;
+}
+
+.Card-Burn-img {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  min-width: 285px;
+  height: 240px;
+  border-radius: 12px;
+
+  position: relative;
+  z-index: 1;
+}
+
+.Card-Burn-img img {
+  filter: brightness(40%);
+  transition: 400ms ease-in-out;
+}
+
+.Card-Burn-Project:hover .Card-Burn-img img {
+  transition: 400ms ease-in-out;
+  filter: brightness(40%) blur(4px);
 }

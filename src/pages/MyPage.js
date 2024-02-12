@@ -5,6 +5,7 @@ import Card_Profile_Project from "../components/Card_Profile_Project";
 
 import "../styles/MyPage.css";
 import Upload from "../img/upload.png";
+import Default from "../img/NonProfile.png";
 
 function MyPage() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -34,6 +35,9 @@ function MyPage() {
                   </label>
                   <input type="file" name="file" id="file" accept="image" onChange={setImageFn} />
                   <div id="file-preview">{imagePreview && <img src={imagePreview} alt="Preview" />}</div>
+                  <div className="Profile-mypage-preview-img" style={{ display: imagePreview ? "none" : "block" }}>
+                    <img src={Default} alt="프로젝트 이미지" />
+                  </div>
                 </div>
               </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
+import Coy from "../img/Coy.png";
 import search from "../img/search.png";
 
 function Header() {
@@ -48,13 +49,11 @@ function Header() {
   return (
     <div className="Header">
       <div className="header-left">
-        <p onClick={handleMainLink} style={{ cursor: "pointer" }}>
-          Logo
-        </p>
+        <img src={Coy} alt="코이 로고" onClick={handleMainLink} style={{ cursor: "pointer" }} />
         <p onClick={handleProjectLink} style={{ cursor: "pointer" }}>
           프로젝트
         </p>
-        <p onClick={handleRecruitmentLink} style={{ cursor: "pointer" }}>
+        <p onClick={handleRecruitmentLink} style={{ cursor: "pointer", marginLeft: "-25px" }}>
           채용 공고
         </p>
       </div>
