@@ -6,10 +6,18 @@
 }
 
 .Card-Profile-Project-img {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  height: 142px;
+  border-radius: 10.5px 10.5px 0 0;
+  /* background-color: #898989; */
+}
+
+.Card-Profile-Project-img img {
   width: 100%;
   height: 142px;
   border-radius: 10.5px 10.5px 0 0;
-  background-color: #898989;
 }
 
 .Card-Profile-Project-content {

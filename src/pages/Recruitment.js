@@ -10,7 +10,7 @@ function Recruitment() {
     <div className="page">
       <Header />
       <div className="content">
-        <div className="Banner">
+        <div className="Banner-Recruit">
           <p className="Banner-sub">서브 타이틀 멘트 생각 좀 해볼게요...</p>
           <p className="Banner-title">채용 공고</p>
         </div>

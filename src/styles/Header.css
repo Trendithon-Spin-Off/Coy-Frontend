@@ -13,11 +13,19 @@
 .header-left,
 .header-right {
   display: flex;
-  /* font-size: 20px; */
-  font-size: 1.2em;
-  /* gap: 30px; */
-  gap: 2vw;
+  font-size: 20px;
+  /* font-size: 1.2em; */
+  gap: 55px;
+  /* gap: 2vw; */
   align-items: center;
+}
+
+.header-right {
+  gap: 40px;
+}
+
+.header-left img {
+  height: 55px;
 }
 
 .search-bar {

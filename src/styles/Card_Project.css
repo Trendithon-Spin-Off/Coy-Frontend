@@ -10,7 +10,13 @@
   width: 100%;
   height: 159px;
   border-radius: 12px 12px 0 0;
-  background-color: #898989;
+  /* background-color: #898989; */
+}
+
+.Card-Project-img img {
+  width: 100%;
+  height: 159px;
+  border-radius: 12px 12px 0 0;
 }
 
 .Card-Project-content {

@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Profile_Project from "../components/Card_Profile_Project";
+
+import Default from "../img/NonProfile.png";
 
 import "../styles/Profile.css";
 
@@ -20,7 +22,9 @@ function Profile() {
           <div className="Profile-profile">
             <div className="Profile-profile-content">
               <div className="Profile-profile-space">
-                <div className="Profile-profile-img"></div>
+                <div className="Profile-profile-img">
+                  <img src={Default} alt="프로필 이미지" />
+                </div>
               </div>
               <div className="Profile-profile-space">
                 <p div className="Profile-profile-name">
@@ -67,9 +71,11 @@ function Profile() {
                 <p div className="Profile-profile-title">
                   Link
                 </p>
-                <p div className="Profile-profile-text">
-                  https://
-                </p>
+                <Link to="#">
+                  <p div className="Profile-profile-text">
+                    https://
+                  </p>
+                </Link>
               </div>
               <div className="Profile-profile-space">
                 <div className="Profile-profile-chat-btn" onClick={handleChat}>

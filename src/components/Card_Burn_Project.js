@@ -5,6 +5,7 @@ import "../styles/Card_Burn_Project.css";
 import Look from "../img/see.png";
 import Like from "../img/like.png";
 import Arrow from "../img/arrow.png";
+import Default from "../img/NonProject.png";
 
 function Card_Project() {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ function Card_Project() {
 
   return (
     <div className="Card-Burn-Project" onClick={handleToProjectLink} style={{ cursor: "pointer" }}>
+      <div className="Card-Burn-img">
+        <img src={Default} alt="프로젝트 이미지" />
+      </div>
       <div className="Card-Burn-Project-common">
         <div className="Card-Burn-Project-looklike">
           <div className="Card-Project-look">
