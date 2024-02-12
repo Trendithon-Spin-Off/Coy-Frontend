@@ -1,0 +1,79 @@
+.Profile-profile-modify-btn {
+  width: 175px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #627086;
+  background-color: white;
+  border: 1px solid #627086;
+  border-radius: 7px;
+
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.Profile-mypage-img {
+  width: 140px;
+  height: 140px;
+  background-color: #898989;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Profile-mypage-img {
+  width: 140px;
+  height: 140px;
+  background-color: #898989;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.Profile-mypage-img input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.Profile-mypage-img .upload-label {
+  position: absolute;
+  width: 105px;
+  bottom: 43%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: "Pretendard-Regular";
+  font-size: 14px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Profile-mypage-img .upload-label img {
+  height: 17.5px;
+  padding-right: 10px;
+}
+
+#file-preview img {
+  height: 140px;
+  width: 140px;
+  border-radius: 140px;
+  object-fit: cover;
+}
+
+#file-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
