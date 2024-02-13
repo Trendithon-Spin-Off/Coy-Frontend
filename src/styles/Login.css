@@ -1,0 +1,120 @@
+body, h1, p, input, button {
+    font-family: 'Your Preferred Font', sans-serif;
+  }
+  
+  .login-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    margin-left: -40px;
+    margin-bottom: 250px;
+    
+  }
+
+  .right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    
+  }
+
+  .required {
+    color: red; /* 빨간색으로 표시 */
+    font-size:70%
+  }
+
+  .left-section h1 {
+    color: #6CB1FF; 
+    font-size: 200%; 
+    text-align: left; 
+  }
+  
+  .left-section p {
+    font-size: 200%;
+    font-weight: bold; 
+    text-align: left; 
+  }
+
+  .right-section h2 {
+    color: #6CB1FF;
+  }
+
+  .right-section p {
+    color: #c4c4c4;
+  }
+
+  .input-container p {
+    color: #000000;
+    margin-right: 310px;
+    margin-bottom: 8px;
+  }
+  
+  .login-box {
+    background-color: #FFFFFF;
+    padding: 60px;
+    width: 400px; 
+    height: 700px; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 100px;
+    margin-right: 240px;
+  }
+
+  .login-button {
+    background-color: #CCCCCC; 
+    color: #ffffff; 
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 15px;
+    width: 150px;
+    transition: background-color 0.3s; 
+  }
+  
+  .login-button.active {
+    background-color: #007BFF; 
+    color: #FFFFFF; 
+  }
+  .divider {
+    color: #BDC7D5;
+    margin: 20px 0;
+    margin-top: 50px;
+  }
+  
+  .signup-prompt span {
+    color: #007BFF;
+    cursor: pointer;
+  }
+
+  .signup-prompt  {
+    margin-top: 20px;
+    font-size: 90%
+  }
+  
+  
+  .input-container {
+    margin: 20px 0;
+    margin-top: 40px;
+    
+  }
+  
+  .underline-input {
+    border: none;
+    border-bottom:  solid #e6e6e6; 
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 10px 5px;
+    width: 350px;
+  }
+  
