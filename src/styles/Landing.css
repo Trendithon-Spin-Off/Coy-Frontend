@@ -1,0 +1,52 @@
+.Landing-img img {
+  width: 100vw;
+}
+
+.Landing-btn-space {
+  display: flex;
+  justify-content: center;
+  height: 0;
+  position: relative;
+  bottom: 280px;
+}
+
+.Landing-btn {
+  width: 300px;
+  height: 73px;
+  background-color: #439aff;
+  border-radius: 12px;
+  color: white;
+  font-size: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 400ms ease-in-out;
+
+  position: relative;
+}
+
+.Landing-btn p {
+  transition: transform 400ms ease-in-out;
+}
+
+.Landing-btn-img img {
+  width: 26px;
+  height: auto;
+  margin-left: 10px;
+}
+
+.Landing-btn-img {
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+
+.Landing-btn:hover p {
+  transform: translateX(18px);
+}
+
+.Landing-btn:hover .Landing-btn-img {
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}

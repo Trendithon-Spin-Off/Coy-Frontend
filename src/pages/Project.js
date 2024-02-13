@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Burn_Project from "../components/Card_Burn_Project";
 import Card_Project from "../components/Card_Project";
+import DropdownMenu from "../components/DropdownMenu/DropdownMenu/DropdownMenu";
 
 import "../styles/Project.css";
 
@@ -20,7 +21,7 @@ function Project() {
       <Header />
       <div className="content">
         <div className="Banner">
-          <p className="Banner-sub">서브 타이틀 멘트 생각 좀 해볼게요...</p>
+          <p className="Banner-sub">가치도 증명하고 아이디어도 탐색할 시간!</p>
           <p className="Banner-title">프로젝트</p>
         </div>
         <div className="Burning">
@@ -50,7 +51,9 @@ function Project() {
                 <p> 프로젝트 등록하기</p>
               </div>
             </div>
-            <div className="Project-category">카테고리 컴포넌트 예정</div>
+            <div className="Project-category">
+              <DropdownMenu />
+            </div>
             <div className="Project-cards">
               <div className="Project-cards-list">
                 <Card_Project />

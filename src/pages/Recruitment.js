@@ -10,7 +10,7 @@ function Recruitment() {
       <Header />
       <div className="content">
         <div className="Banner">
-          <p className="Banner-sub">서브 타이틀 멘트 생각 좀 해볼게요...</p>
+          <p className="Banner-sub">사람인이 제공하는 최신 공고로 새로운 기회 탐색!</p>
           <p className="Banner-title">채용 공고</p>
         </div>
         <div className="Burning">
@@ -24,7 +24,6 @@ function Recruitment() {
                 <Card_Burn_Recruitment />
                 <Card_Burn_Recruitment />
                 <Card_Burn_Recruitment />
-              
               </div>
             </div>
           </div>
@@ -36,14 +35,12 @@ function Recruitment() {
                 <p>채용 공고 탐색하기👀</p>
               </div>
             </div>
-            <div className="Project-category">카테고리 컴포넌트 예정</div>
             <div className="Project-cards">
               <div className="Project-cards-list">
-              <Card_Recruitment />
-              <Card_Recruitment />
-              <Card_Recruitment />
-              <Card_Recruitment />
-              
+                <Card_Recruitment />
+                <Card_Recruitment />
+                <Card_Recruitment />
+                <Card_Recruitment />
               </div>
             </div>
           </div>
