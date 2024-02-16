@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
+import Register2 from "./pages/Register2";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import MyPage from "./pages/MyPage";
@@ -26,6 +27,7 @@ function App() {
           {/* 랜딩, 회원가입, 로그인 */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/register2" element={<Register2 />} />
           <Route exact path="/login" element={<Login />} />
 
           {/* 프로필 조회 */}
