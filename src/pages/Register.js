@@ -1,34 +1,59 @@
 import React, { useState } from 'react';
-import Header from "../components/Header";
 import { useNavigate } from 'react-router-dom';
+import Header from "../components/Header";
 import "../styles/Register.css";
 import { FiAlertCircle } from "react-icons/fi";
+import axios from 'axios';
 
 function Register() {
-  const navigate = useNavigate(); 
-  const [id, setId] = useState('');
+  const navigate = useNavigate();
+  const [id, setId] = useState(''); // 사용자 이름
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(''); // 사용자 아이디
   const [password, setPassword] = useState('');
   const [idStatus, setIdStatus] = useState('');
-  const [isIdAvailable, setIsIdAvailable] = useState(false); 
+  const [isIdAvailable, setIsIdAvailable] = useState(false);
+
+  const API_BASE_URL = 'http://localhost:8080/api'; // 백엔드 서버 주소 조정 필요
 
   const isFormFilled = id.length > 0 && email.length > 0 && username.length > 0 && password.length > 0;
 
-  const checkIdAvailability = () => {
-    const isAvailable = Math.random() > 0.5;
-    setIsIdAvailable(isAvailable); 
-    if (isAvailable) {
-      setIdStatus('사용 가능한 아이디입니다.');
-    } else {
-      setIdStatus('중복된 아이디입니다.');
+  const checkIdAvailability = async () => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/memberId/check`, {
+        memberId: username
+      });
+      setIsIdAvailable(response.data);
+      setIdStatus(response.data ? '사용 가능한 아이디입니다.' : '중복된 아이디입니다.');
+    } catch (error) {
+      console.error("중복 확인 실패", error);
+      setIdStatus('중복 확인 중 오류가 발생했습니다.');
     }
   };
 
-  const handleSubmit = () => {
-  
-    console.log("회원가입 두번째 페이지");
-    navigate('/register2'); 
+  const handleSubmit = async () => {
+    if (!isIdAvailable) {
+      alert('아이디 중복을 확인해주세요.');
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/sign-up`, {
+        memberId: username,
+        email: email,
+        name: id, // 이름
+        password: password
+      });
+      if (response.data) {
+        console.log("회원가입 성공");
+        navigate('/register2'); // 회원가입 성공 후 이동할 페이지
+      } else {
+        alert('회원가입에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error("회원가입 실패", error);
+      alert('회원가입 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -44,7 +69,7 @@ function Register() {
           <div className="login-box">
             <h2>회원가입</h2>
             <p>회원가입을 통해 더 많은 서비스를 이용해 보세요!</p>
-      
+
             <div className="input-container">
               <p>이름<span className="required"> *필수</span></p>
               <input
@@ -84,7 +109,7 @@ function Register() {
                 </button>
               </div>
               {idStatus && (
-                <div className={`id-availability ${idStatus === '사용 가능한 아이디입니다.' ? 'id-available' : 'id-taken'}`}>
+                <div className={`id-availability ${isIdAvailable ? 'id-available' : 'id-taken'}`}>
                   {idStatus === '중복된 아이디입니다.' && <FiAlertCircle className="id-status-icon" />}
                   {idStatus}
                 </div>
@@ -92,8 +117,7 @@ function Register() {
             </div>
 
             <div className="input-container">
-              <p className="password-label">ㅤ비밀번호<span className="required"> *필수</span></p>
-
+              <p className="password-label">비밀번호<span className="required"> *필수</span></p>
               <input
                 className="underline-input"
                 type="password"
@@ -115,7 +139,6 @@ function Register() {
         </div>
       </div>
     </div>
-
   );
 }
 

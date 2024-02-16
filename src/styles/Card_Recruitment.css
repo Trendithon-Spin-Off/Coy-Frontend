@@ -120,14 +120,7 @@
   .to-project-btn img {
     height: 20px;
   }
-  
-  .Card_Recruitment:hover .Card_Recruitment-common {
-    opacity: 0;
-  }
-  
-  .Card_Recruitment:hover .Card_Recruitment-hover {
-    opacity: 1;
-  }
+
   .Card_Recruitment-company {
     display: flex;
     align-items: center;
@@ -161,6 +154,11 @@
     margin-top: 20px; 
   }
   
+  
+  .like-icon {
+    margin: 0;
+  }
+  
   .apply {
     margin-left: 39px; 
     padding: 8px 39px; 
@@ -170,9 +168,10 @@
     font-size: 12px;
     background-color: transparent; 
     cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
   }
   
-  .like-icon {
-    margin: 0;
+  .apply:hover {
+    background-color: rgb(67, 154, 255); 
+    color: white; 
   }
-  

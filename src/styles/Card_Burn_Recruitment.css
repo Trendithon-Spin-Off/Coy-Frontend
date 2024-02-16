@@ -155,21 +155,10 @@
     margin-top: 20px; 
   }
   
-  .apply-text {
-    margin-left: 23px; 
-    padding: 10px 50px; 
-    border: 0.3px solid #439aff;
-    border-radius: 29px;
-    color: #439aff;
-    font-size: 12px;
-    background-color:#fff; 
-    cursor: pointer; 
-    margin-top: -60px;
-  }
-  
   .like-icon {
     margin: 0;
   }
+
   .Card_Burn_Recruitment-company-name {
     font-size: 18px; 
     font-weight: bold; 
@@ -227,3 +216,21 @@
     font-weight: bold;
     margin-bottom: 4px;
   }
+.apply-text {
+  
+  margin-left: 23px; 
+  padding: 10px 50px; 
+  border: 0.3px solid #439aff;
+  border-radius: 29px;
+  color: #439aff; 
+  font-size: 12px;
+  background-color: transparent; 
+  cursor: pointer; 
+  margin-top: -60px;
+  transition: background-color 0.7s, color 0.7s; 
+}
+
+.apply-text:hover {
+  background-color: rgb(67, 154, 255);
+  color: white; 
+}

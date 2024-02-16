@@ -3,7 +3,6 @@ h1,
 p,
 input,
 button {
-  /* font-family: 'Your Preferred Font', sans-serif; */
   font-family: "Pretendard-Regular";
 }
 
@@ -35,20 +34,22 @@ input {
 }
 
 .required {
-  color: red; /* 빨간색으로 표시 */
+  color: red; 
   font-size: 70%;
 }
 
 .left-section h1 {
   color: #6cb1ff;
-  font-size: 200%;
+  font-size: 160%;
   text-align: left;
+  margin-left: -40px;
 }
 
 .left-section p {
-  font-size: 200%;
+  font-size: 160%;
   font-weight: bold;
   text-align: left;
+  margin-left: -40px;
 }
 
 .right-section h2 {
