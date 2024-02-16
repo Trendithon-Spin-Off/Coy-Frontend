@@ -40,17 +40,10 @@ function CardRecruitment() {
               <p className="Card_Recruitment-description">경력ㅤㅤㅤㅤㅤㅤㅤ근무형태</p>
             </div>
             
-            
             <div className="Card_Recruitment-action">
   <img src={love} alt="좋아요" className="like-icon" />
-  <p className="apply">채용 공고 보러가기</p>
+  <button className="apply">채용 공고 보러가기</button>
 </div>
-          </div>
-        </div>
-        <div className="Card_Recruitment-hover">
-          <div className="to-project-btn">
-            <p>👀</p>
-            <img src={Arrow} alt="탐색 버튼" />
           </div>
         </div>
       </div>

@@ -39,8 +39,9 @@ function Card_Burn_Recruitment() {
           </div>
         </div>
         <div className="Card_Burn_Recruitment-action">
-          <p className="apply-text">채용 공고 보러가기</p>
+        <button className="apply-text">채용 공고 보러가기</button>
         </div>
+
         <div className="Card_Burn_Recruitment-hover">
         </div>
       </div>
