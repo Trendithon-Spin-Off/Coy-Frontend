@@ -1,15 +1,18 @@
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: flex;
+  z-index: 1;
 }
 
 .dropdown-button {
   color: rgba(98, 112, 134, 1);
   background-color: white;
   border: 1px solid rgba(98, 112, 134, 1);
-  border-radius: 20px;
+  border-radius: 30px;
   font-size: 15px;
-  padding: 10px 30px;
+  padding: 15px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .arrow-button {
   margin-left: 5px;
@@ -84,4 +87,19 @@
 
 .menu-item input[type="checkbox"]:checked::before {
   border-color: white;
+}
+
+/* 프로젝트 등록, 수정 ..에 쓰일 dropdown*/
+.arrow-button.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease; /* 부드러운 전환 */
+}
+
+/* 팀원 아이디 삭제 버튼*/
+.clear-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }

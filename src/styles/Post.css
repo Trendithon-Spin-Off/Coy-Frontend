@@ -1,0 +1,182 @@
+.page {
+  margin-bottom: 200px;
+  background-color: #f9f9f9;
+}
+/* 카테고리 버튼*/
+.dropdown-post {
+  margin-top: 50px;
+}
+
+/* 상단 입력란*/
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-container label {
+  width: max-content;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.required {
+  color: red;
+  font-size: 12px;
+  margin-left: 1.5rem;
+}
+
+.input-container input,
+.input-container textarea {
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 50px;
+  background-color: #f9f9f9;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+  border-bottom-color: rgb(147, 147, 147);
+}
+
+.input-container ::placeholder {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.text-container {
+  float: left;
+  width: 85%;
+}
+
+/*이미지 업로드 */
+.image-box {
+  width: 100%;
+  height: 350px;
+  border: 1px solid #bdc7d5;
+  background-color: #f0f1f5;
+  border-radius: 20px;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.image-box button {
+  background-color: white;
+  margin-top: 130px;
+  margin-bottom: 10px;
+  color: #bdc7d5;
+  border-radius: 30px;
+  border: 1px solid #bdc7d5;
+  padding: 25px;
+}
+.image-box p {
+  color: gray;
+}
+/* 하단 입력란*/
+.project-lower-container {
+  background-color: #f0f1f5;
+  margin-top: 150px;
+  padding-bottom: 48px;
+}
+
+.url-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.url-container label {
+  width: max-content;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 50px;
+}
+.url-container input {
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  background-color: #f0f1f5;
+  width: 90%;
+}
+.url-container input:focus {
+  border-bottom-color: rgb(147, 147, 147);
+}
+.url-container ::placeholder {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* 멤버 입력란*/
+.member-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f1f5;
+}
+
+.select-member {
+  margin: 0;
+}
+
+.member-container > label {
+  margin-bottom: 50px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 50px;
+}
+
+.member-container input {
+  width: 50%;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  background-color: #f0f1f5;
+  margin-right: 20px;
+}
+
+.member-container input::placeholder {
+  font-size: 12px;
+}
+.add-member {
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 15px 30px;
+  background-color: white;
+  color: #627086;
+  border: 1px solid #627086;
+  margin-top: 20px;
+}
+
+.dropdown {
+  display: inline;
+  margin-right: 20px;
+}
+
+/*등록하기 버튼*/
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+.submit-container button {
+  padding: 20px 70px;
+  border: none;
+  background-color: #627086;
+  color: white;
+  font-size: 18px;
+  border-radius: 18px;
+}
+.submit-container button:hover {
+  background-color: #525e71;
+}
