@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Card_Recruitment from "../components/Card_Recruitment";
 
 import "../styles/LikeRecruitment.css";
 
@@ -14,6 +15,8 @@ function LikeRecruitment() {
   const handleRecruitLike = () => {
     navigate("/like/recruitment");
   };
+
+  const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
 
   return (
     <div className="page">
@@ -32,7 +35,7 @@ function LikeRecruitment() {
             </p>
           </div>
           <div className="Like-list">
-            <div className="Like-list-cards">해당 컴포넌트 삽입해주세요 !</div>
+            <div className="Like-list-cards">{recruitCards}</div>
           </div>
         </div>
       </div>

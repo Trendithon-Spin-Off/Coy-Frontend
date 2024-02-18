@@ -16,6 +16,8 @@ function LikeProject() {
     navigate("/like/recruitment");
   };
 
+  const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+
   return (
     <div className="page">
       <Header />
@@ -33,16 +35,7 @@ function LikeProject() {
             </p>
           </div>
           <div className="Like-list">
-            <div className="Like-list-cards">
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-              <Card_Project />
-            </div>
+            <div className="Like-list-cards">{projectCards}</div>
           </div>
         </div>
       </div>

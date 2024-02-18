@@ -5,6 +5,8 @@ import Card_Burn_Recruitment from "../components/Card_Burn_Recruitment";
 import "../styles/Recruitment.css";
 
 function Recruitment() {
+  const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
+
   return (
     <div className="page">
       <Header />
@@ -36,12 +38,7 @@ function Recruitment() {
               </div>
             </div>
             <div className="Project-cards">
-              <div className="Project-cards-list">
-                <Card_Recruitment />
-                <Card_Recruitment />
-                <Card_Recruitment />
-                <Card_Recruitment />
-              </div>
+              <div className="Project-cards-list">{recruitCards}</div>
             </div>
           </div>
         </div>

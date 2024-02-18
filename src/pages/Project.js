@@ -16,6 +16,8 @@ function Project() {
     navigate("/project/post");
   };
 
+  const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+
   return (
     <div className="page">
       <Header />
@@ -55,15 +57,7 @@ function Project() {
               <DropdownMenu />
             </div>
             <div className="Project-cards">
-              <div className="Project-cards-list">
-                <Card_Project />
-                <Card_Project />
-                <Card_Project />
-                <Card_Project />
-                <Card_Project />
-                <Card_Project />
-                <Card_Project />
-              </div>
+              <div className="Project-cards-list">{projectCards}</div>
             </div>
           </div>
         </div>
