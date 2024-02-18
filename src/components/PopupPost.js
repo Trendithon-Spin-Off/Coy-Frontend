@@ -1,6 +1,6 @@
 import "../styles/PopupPost.css";
 import { SlCheck } from "react-icons/sl";
-
+import { Link } from "react-router-dom";
 const PopupPost = () => {
   return (
     <div className="popup-container">
@@ -8,7 +8,11 @@ const PopupPost = () => {
         <SlCheck className="check-icon" />
         등록이 완료되었어요
       </span>
-      <button className="verify">확인</button>
+      <div>
+        <Link to="/project">
+          <button className="verify">확인</button>
+        </Link>
+      </div>
     </div>
   );
 };
