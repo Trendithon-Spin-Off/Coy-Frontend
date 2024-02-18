@@ -163,6 +163,28 @@
   margin-right: 20px;
 }
 
+/*추가된 파트 & 멤버 */
+.member {
+  margin-top: 20px;
+}
+.member-id {
+  background-color: #e5f4ff;
+  padding: 3px 6px;
+  border: 1px solid #439aff;
+  display: inline;
+  border-radius: 3px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 /*등록하기 버튼*/
 .submit-container {
   display: flex;
