@@ -21,7 +21,7 @@
 }
 
 .Card-Profile-Project-content {
-  height: calc(296px - 142px - 36px);
+  height: calc(296px - 142px);
   padding: 18px 22px;
 }
 
@@ -94,7 +94,7 @@
   align-items: center;
   justify-content: space-between;
 
-  width: calc(115px - 36px);
+  width: 105px;
   height: 42px;
   background-color: #439aff;
   color: white;

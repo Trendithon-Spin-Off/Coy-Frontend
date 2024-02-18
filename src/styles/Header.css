@@ -30,7 +30,7 @@
 
 .search-bar {
   /* width: 280px; */
-  width: 16.5vw;
+  width: calc(16.5vw + 3vw);
   height: 44px;
 
   display: flex;

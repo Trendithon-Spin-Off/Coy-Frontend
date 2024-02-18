@@ -6,16 +6,16 @@ button {
   font-family: "Pretendard-Regular";
 }
 
-input {
+.Neinput {
   outline: none;
 }
 
-.login-container {
+.Nelogin-container {
   display: flex;
   height: 100vh;
 }
 
-.left-section {
+.Neleft-section {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ input {
   margin-bottom: 250px;
 }
 
-.right-section {
+.Neright-section {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -33,52 +33,52 @@ input {
   align-items: flex-start;
 }
 
-.required {
+.Nerequired {
   color: red; 
   font-size: 70%;
 }
 
-.left-section h1 {
+.Neleft-section h1 {
   color: #6cb1ff;
   font-size: 160%;
   text-align: left;
-  margin-left: -40px;
+  margin-left: 90px;
 }
 
-.left-section p {
+.Neleft-section p {
   font-size: 160%;
   font-weight: bold;
   text-align: left;
-  margin-left: -40px;
+  margin-left: 90px;
 }
 
-.right-section h2 {
+.Neright-section h2 {
   color: #439aff;
 }
 
-.right-section p {
+.Neright-section p {
   color: #c4c4c4;
 }
 
-.input-container p {
+.Neinput-container p {
   color: #000000;
   margin-right: 310px;
   margin-bottom: 8px;
 }
 
-.login-box {
+.Nelogin-box {
   background-color: #ffffff;
   padding: 60px;
-  width: 400px;
-  height: 700px;
+  width: 500px;
+  height: 750px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 100px;
+  margin-top: 200px;
   margin-right: 240px;
 }
 
-.login-button {
+.Nelogin-button {
   background-color: #cccccc;
   color: #ffffff;
   padding: 10px;
@@ -90,32 +90,32 @@ input {
   transition: background-color 0.3s;
 }
 
-.login-button.active {
+.Nelogin-button.active {
   background-color: #007bff;
   color: #ffffff;
 }
-.divider {
+.Nedivider {
   color: #bdc7d5;
   margin: 20px 0;
   margin-top: 50px;
 }
 
-.signup-prompt span {
+.Nesignup-prompt span {
   color: #007bff;
   cursor: pointer;
 }
 
-.signup-prompt {
+.Nesignup-prompt {
   margin-top: 20px;
   font-size: 90%;
 }
 
-.input-container {
+.Neinput-container {
   margin: 20px 0;
   margin-top: 40px;
 }
 
-.underline-input {
+.Neunderline-input {
   border: none;
   border-bottom: solid #e6e6e6;
   font-size: 12px;

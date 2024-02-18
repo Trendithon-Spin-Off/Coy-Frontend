@@ -20,7 +20,7 @@ function Register2() {
   const jobOptions = {
     "프론트엔드": ["IOS", "안드로이드", "웹프론트엔드", "웹퍼블리셔"],
     "백엔드": ["웹서버", "블록체인", "AI", "DB/빅데이터/DS", "게임 서버"],
-    "디자인": ["그래픽 디자인", "프로덕트 디자인", "3D 디자인", "모션/이펙트 디자인"],
+    "디자인": ["그래픽 디자인", "프로덕트 디자인", "3D 디자인", "모션/이펙트디자인"],
     "기획" : ["기획"]
   };
   const [subJobs, setSubJobs] = useState([]);
@@ -107,21 +107,21 @@ function Register2() {
   return (
     <div className="page">
       <Header />
-      <div className="login-container">
-        <div className="left-section">
+      <div className="Nelogin-container">
+        <div className="Neleft-section">
           <h1>반가워요!</h1>
           <p>프로젝트 뒤 숨겨진 당신의 가치를</p>
           <p>보여줄 준비가 되셨나요?</p>
         </div>
-        <div className="right-section">
-          <div className="login-box">
+        <div className="Neright-section">
+          <div className="Nelogin-box">
             <h2>추가 정보 입력</h2>
             <p>추가 정보를 입력하면 더 많은 기회를 얻을 수 있어요.</p>
             
-            <div className="input-container">
+            <div className="Neinput-container">
               <p>한줄 소개</p>
               <input
-                className="underline-input"
+                className="Neunderline-input"
                 type="text"
                 placeholder="한줄 소개를 입력해주세요"
                 value={id}
@@ -129,9 +129,9 @@ function Register2() {
               />
             </div>
 
-            <div className="input-container">
-              <p className="password-label">ㅤ(희망) 직무 선택</p>
-            <div className="flex-container">
+            <div className="Neinput-container">
+              <p className="Nepassword-label">ㅤ(희망) 직무 선택</p>
+            <div className="Neflex-container" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
   <div className="input-container dropdown-container job-dropdown">
     <button className={`job-select-btn ${selectedJob ? 'selected' : ''}`} onClick={toggleJobDropdown}>
       {selectedJob || "직무 선택"}
@@ -153,7 +153,7 @@ function Register2() {
         )}
       </div>
 
-      <div className="input-container dropdown-container">
+      <div className="input-container dropdown-container ">
         <button className={`job-select-btn ${selectedSubJob ? 'selected' : ''}`} onClick={toggleSubJobDropdown}>
           {selectedSubJob || "세부직무 선택"}
           {isSubJobDropdownOpen ? <IoChevronUpOutline className="dropdown-arrow" /> : <IoChevronDownOutline className="dropdown-arrow" />}
@@ -176,9 +176,9 @@ function Register2() {
       </div>
 
 
-      <div className="input-container" style={{ marginTop: '-10px' }}>
-  <div className="flex-container" style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex', width: '100%' }}>
-    <p className="password-label" style={{ marginBottom: 0, marginRight: 'auto' }}>ㅤ사용 가능한 스택</p>
+      <div className="Neinput-container" style={{ marginTop: '-10px' }}>
+  <div className="Neflex-container" style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex', width: '100%' }}>
+    <p className="Nepassword-label" style={{ marginBottom: 0, marginRight: 'auto' }}>ㅤ사용 가능한 스택</p>
     <span onClick={toggleStackSelection} style={{ cursor: 'pointer', color: 'gray', display: 'inline-flex', alignItems: 'center' }}>
       스택 선택하기 <IoChevronForward />
     </span>
@@ -220,10 +220,10 @@ function Register2() {
     <SelectedStacksDisplay selectedStacks={selectedStacks} />
   </div>
 </div>
-            <div className="input-container">
+            <div className="Neinput-container">
               <p>Linkㅤㅤ</p>
               <input
-                className="underline-input"
+                className="Neunderline-input"
                 type="text"
                 placeholder="github.com/"
                 onChange={(e) => setPassword(e.target.value)}
@@ -231,7 +231,7 @@ function Register2() {
             </div>
             
             <button 
-              className={`login-button ${isFormFilled ? 'active' : ''}`}
+              className={`Nelogin-button ${isFormFilled ? 'active' : ''}`}
               type="button"
               onClick={() => console.log("회원가입 시도")}
               disabled={!isFormFilled}
