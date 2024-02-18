@@ -7,21 +7,21 @@ import axios from 'axios';
 
 function Register() {
   const navigate = useNavigate();
-  const [id, setId] = useState(''); // 사용자 이름
+  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState(''); // 사용자 아이디
+  const [memberId, setMemberId] = useState(''); 
   const [password, setPassword] = useState('');
   const [idStatus, setIdStatus] = useState('');
   const [isIdAvailable, setIsIdAvailable] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:8080/api'; // 백엔드 서버 주소 조정 필요
+  const API_BASE_URL = 'http://localhost:8080/api';
 
-  const isFormFilled = id.length > 0 && email.length > 0 && username.length > 0 && password.length > 0;
+  const isFormFilled = userName.length > 0 && email.length > 0 && memberId.length > 0 && password.length > 0;
 
   const checkIdAvailability = async () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/memberId/check`, {
-        memberId: username
+        memberId: memberId
       });
       setIsIdAvailable(response.data);
       setIdStatus(response.data ? '사용 가능한 아이디입니다.' : '중복된 아이디입니다.');
@@ -32,6 +32,11 @@ function Register() {
   };
 
   const handleSubmit = async () => {
+    if (!isFormFilled) {
+      alert('모든 필수 항목을 입력해주세요.');
+      return;
+    }
+
     if (!isIdAvailable) {
       alert('아이디 중복을 확인해주세요.');
       return;
@@ -39,14 +44,14 @@ function Register() {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/sign-up`, {
-        memberId: username,
-        email: email,
-        name: id, // 이름
-        password: password
+        memberId,
+        email,
+        name: userName,
+        password
       });
       if (response.data) {
         console.log("회원가입 성공");
-        navigate('/register2'); // 회원가입 성공 후 이동할 페이지
+        navigate('/register2', { state: { id: memberId } });
       } else {
         alert('회원가입에 실패했습니다.');
       }
@@ -76,8 +81,8 @@ function Register() {
                 className="Neunderline-input"
                 type="text"
                 placeholder="이름을 입력해주세요"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="Neinput-container">
@@ -98,8 +103,8 @@ function Register() {
                   className="Neunderline-input Neid-input"
                   type="text"
                   placeholder="아이디를 입력해주세요"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={memberId}
+                  onChange={(e) => setMemberId(e.target.value)}
                 />
                 <button 
                   onClick={checkIdAvailability} 

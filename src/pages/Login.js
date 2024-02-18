@@ -5,13 +5,13 @@ import "../styles/Login.css";
 import axios from 'axios';
 
 function Login() {
-  const [id, setId] = useState('');
+  const [memberId, setMemberId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const API_BASE_URL = 'http://localhost:8080/api'; // 백엔드 서버 주소 조정 필요
+  const API_BASE_URL = 'http://localhost:8080/api'; 
 
-  const isFormFilled = id.length > 0 && password.length > 0;
+  const isFormFilled = memberId.length > 0 && password.length > 0;
 
   const handleLoginClick = async () => {
     if (!isFormFilled) {
@@ -21,21 +21,22 @@ function Login() {
   
     try {
       const response = await axios.post(`${API_BASE_URL}/login`, {
-        memberId: id,
+        memberId: memberId,
         password: password,
       });
   
       if (response.data && response.data.token) {
         console.log("로그인 성공", response.data);
-        localStorage.setItem('token', response.data.token); // JWT 토큰 저장
-        navigate('/home'); // 로그인 성공 후 이동할 페이지
+        localStorage.setItem('token', response.data.token); 
+        navigate('/'); 
       } else {
-        // 응답에 토큰이 없는 경우 처리
-        alert("로그인 실패: 응답이 올바르지 않습니다.");
+        alert(`로그인 실패: ${response.data.message || "응답이 올바르지 않습니다."}`);
       }
     } catch (error) {
       console.error("로그인 실패", error.response ? error.response : error);
-      const errorMessage = error.response ? (error.response.data.message || "아이디 또는 비밀번호를 확인해주세요.") : "서버 연결에 실패했습니다.";
+      const errorMessage = error.response 
+        ? (error.response.data.message || "아이디 또는 비밀번호를 확인해주세요.") 
+        : "서버 연결에 실패했습니다.";
       alert(`로그인 실패: ${errorMessage}`);
     }
   };
@@ -64,8 +65,8 @@ function Login() {
                 className="Neunderline-input"
                 type="text"
                 placeholder="아이디를 입력해주세요"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
+                value={memberId}
+                onChange={(e) => setMemberId(e.target.value)}
               />
             </div>
             <div className="Neinput-container">

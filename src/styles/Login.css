@@ -21,7 +21,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: -40px;
+  margin-left: 50px;
   margin-bottom: 250px;
 }
 
@@ -43,6 +43,7 @@ button {
   font-size: 160%;
   text-align: left;
   margin-left: 90px;
+  font-weight: bold;
 }
 
 .Neleft-section p {

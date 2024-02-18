@@ -68,7 +68,7 @@
   margin-right: 240px;
 }
 
-.Nelogin-button {
+.login-button {
   background-color: #cccccc;
   color: #ffffff;
   padding: 10px;
@@ -80,7 +80,7 @@
   transition: background-color 0.3s;
 }
 
-.Nelogin-button.active {
+.login-button.active {
   background-color: #007bff;
   color: #ffffff;
 }
