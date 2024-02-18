@@ -59,8 +59,12 @@
   color: #627086;
 }
 
+.Burning-text {
+  width: 340px;
+}
+
 .Burning-card-list {
-  max-width: calc(100vw - 240px -320px);
+  width: calc(100vw - 240px - 340px);
   overflow: hidden;
 }
 
@@ -140,4 +144,24 @@
 .Project-btn:hover img {
   transition: 400ms ease-in-out;
   filter: brightness(0) invert(1);
+}
+
+.swiper-button-prev {
+  background: url("../img/left.png");
+  width: 49px;
+  height: 49px;
+  left: 72px;
+  background-size: cover;
+  background-position: center;
+  cursor: default;
+}
+
+.swiper-button-next {
+  background: url("../img/right.png");
+  width: 49px;
+  height: 49px;
+  right: 72px;
+  background-size: cover;
+  background-position: center;
+  cursor: default;
 }

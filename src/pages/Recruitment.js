@@ -1,11 +1,35 @@
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import { Navigation, Scrollbar, Pagination } from "swiper/modules";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Recruitment from "../components/Card_Recruitment";
 import Card_Burn_Recruitment from "../components/Card_Burn_Recruitment";
+
 import "../styles/Recruitment.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+SwiperCore.use([Navigation, Scrollbar, Pagination]);
 
 function Recruitment() {
+  // useState를 사용하여 현재 활성화된 슬라이드의 인덱스를 추적
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSlideChange = (swiper) => {
+    // 활성화된 슬라이드의 인덱스를 업데이트
+    setActiveIndex(swiper.activeIndex);
+  };
+
   const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
+
+  const BurnrecruitCards = Array.from({ length: 7 }, (_, index) => (
+    <SwiperSlide key={index}>
+      <Card_Burn_Recruitment />
+    </SwiperSlide>
+  ));
 
   return (
     <div className="page">
@@ -23,9 +47,21 @@ function Recruitment() {
             </div>
             <div className="Burning-card-list">
               <div className="Burning-list">
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
+                <Swiper
+                  className="cardSwiper"
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  scrollbar={{ draggable: true }}
+                  navigation
+                  pagination={{ clickable: true }}
+                  breakpoints={{ 1730: { slidesPerView: 4 }, 1450: { slidePreView: 3 }, 1160: { slidePreView: 2 } }}
+                  style={{
+                    "--swiper-pagination-color": "#439AFF",
+                    "--swiper-navigation-color": "rgb(0,0,0,0)",
+                  }}
+                >
+                  {BurnrecruitCards}
+                </Swiper>
               </div>
             </div>
           </div>
