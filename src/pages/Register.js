@@ -59,31 +59,31 @@ function Register() {
   return (
     <div className="page">
       <Header />
-      <div className="login-container">
-        <div className="left-section">
+      <div className="Nelogin-container">
+        <div className="Neleft-section">
           <h1>반가워요!</h1>
           <p>프로젝트 뒤 숨겨진 당신의 가치를</p>
           <p>보여줄 준비가 되셨나요?</p>
         </div>
-        <div className="right-section">
-          <div className="login-box">
+        <div className="Neright-section">
+          <div className="Nelogin-box">
             <h2>회원가입</h2>
             <p>회원가입을 통해 더 많은 서비스를 이용해 보세요!</p>
 
-            <div className="input-container">
-              <p>이름<span className="required"> *필수</span></p>
+            <div className="Neinput-container">
+            <p>이름<span className="Nerequired"> *필수</span></p>
               <input
-                className="underline-input"
+                className="Neunderline-input"
                 type="text"
                 placeholder="이름을 입력해주세요"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
               />
             </div>
-            <div className="input-container">
-              <p>이메일<span className="required"> *필수</span></p>
+            <div className="Neinput-container">
+              <p>이메일<span className="Nerequired"> *필수</span></p>
               <input
-                className="underline-input"
+                className="Neunderline-input"
                 type="email"
                 placeholder="이메일을 입력해주세요"
                 value={email}
@@ -91,11 +91,11 @@ function Register() {
               />
             </div>
 
-            <div className="input-container id-container">
-              <p>아이디<span className="required"> *필수</span></p>
-              <div className="id-input-group">
+            <div className="Neinput-container Neid-container">
+              <p>아이디<span className="Nerequired"> *필수</span></p>
+              <div className="Neid-input-group">
                 <input
-                  className="underline-input id-input"
+                  className="Neunderline-input Neid-input"
                   type="text"
                   placeholder="아이디를 입력해주세요"
                   value={username}
@@ -103,23 +103,23 @@ function Register() {
                 />
                 <button 
                   onClick={checkIdAvailability} 
-                  className={`check-id ${isIdAvailable ? 'id-available-btn' : ''}`}
+                  className={`Necheck-id ${isIdAvailable ? 'Neid-available-btn' : ''}`}
                 >
                   중복확인
                 </button>
               </div>
               {idStatus && (
-                <div className={`id-availability ${isIdAvailable ? 'id-available' : 'id-taken'}`}>
-                  {idStatus === '중복된 아이디입니다.' && <FiAlertCircle className="id-status-icon" />}
+                <div className={`Neid-availability ${isIdAvailable ? 'Neid-available' : 'Neid-taken'}`}>
+                  {idStatus === '중복된 아이디입니다.' && <FiAlertCircle className="Neid-status-icon" />}
                   {idStatus}
                 </div>
               )}
             </div>
 
-            <div className="input-container">
-              <p className="password-label">비밀번호<span className="required"> *필수</span></p>
+            <div className="Neinput-container">
+              <p className="Nepassword-label">비밀번호<span className="Nerequired"> *필수</span></p>
               <input
-                className="underline-input"
+                className="Neunderline-input"
                 type="password"
                 placeholder="비밀번호를 입력해주세요"
                 value={password}
