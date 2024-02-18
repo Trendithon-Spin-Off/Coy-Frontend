@@ -6,8 +6,6 @@ import { CiHeart } from "react-icons/ci";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-//컴포넌트
-import Carousel_Project_Image from "../components/Carousel_Project_Image";
 
 function Read() {
   return (
@@ -49,7 +47,7 @@ function Read() {
             </Col>
             <Col md="auto"></Col>
             <Col style={{ width: "50%" }}>
-              <Carousel_Project_Image />
+              <div className="project-main-img">{/*이미지 */}</div>
             </Col>
           </Row>
         </Container>

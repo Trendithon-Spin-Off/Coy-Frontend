@@ -12,7 +12,7 @@ import "../styles/Post.css";
 import Header from "../components/Header";
 import DropdownPart from "../components/DropdownMenu/DropdownMenu/DropdownPart";
 import DropdownPost from "../components/DropdownMenu/DropdownMenu/DropdownPost";
-import PopupPost from "../components/PopupPost";
+import Popup from "../components/Popup";
 
 function Post() {
   // 프로젝트 세부 정보에 대한 상태 변수들
@@ -264,7 +264,7 @@ function Post() {
               </button>
             </div>
           </form>
-          {showPopup && <PopupPost />}
+          {showPopup && <Popup action="등록" />}
         </div>
       </div>
     </div>

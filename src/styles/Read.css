@@ -68,3 +68,13 @@
   color: #439aff;
   background-color: white;
 }
+.project-main-img {
+  text-align: center;
+  font-size: 18px;
+  background: #898989;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 200px 50px;
+  border-radius: 20px;
+}
