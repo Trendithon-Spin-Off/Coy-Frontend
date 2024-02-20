@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { IoLogoGithub } from "react-icons/io5";
-
 import { IoIosClose } from "react-icons/io";
-//리액트 부트스트랩
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import "../styles/Post.css";
 import Header from "../components/Header";
 import DropdownPart from "../components/DropdownMenu/DropdownMenu/DropdownPart";
 import DropdownPost from "../components/DropdownMenu/DropdownMenu/DropdownPost";
 import Popup from "../components/Popup";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Post() {
-  // 프로젝트 세부 정보에 대한 상태 변수들
+  const navigate = useNavigate();
+
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectBackground, setProjectBackground] = useState("");
@@ -24,25 +24,48 @@ function Post() {
   const [selectedFileName, setSelectedFileName] = useState("");
   const [distribution, setDistribution] = useState("");
   const [github, setGithub] = useState("");
+  const [projectMember, setProjectMember] = useState("");
+  const [selectedParts, setSelectedParts] = useState([]);
+  const [projectMembers, setProjectMembers] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
-  // 프로젝트 이미지 변경을 처리하는 함수
   const handleProjectImageChange = (e) => {
     const imageFile = e.target.files[0];
     setProjectImage(imageFile);
     setSelectedFileName(imageFile ? imageFile.name : "");
   };
 
-  // 폼 제출을 처리하는 함수
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
+
+    // form 데이터 생성
+    const formData = new FormData();
+    formData.append("projectName", projectName);
+    formData.append("projectDescription", projectDescription);
+    formData.append("projectBackground", projectBackground);
+    formData.append("projectFeatures", projectFeatures);
+    formData.append("projectImage", projectImage);
+    formData.append("distribution", distribution);
+    formData.append("github", github);
+    formData.append("projectMembers", JSON.stringify(projectMembers)); // JSON 형태로 변환하여 추가
+
+    try {
+      // 서버로 POST 요청 보내기
+      const response = await axios.post("http://localhost:3000/post", formData);
+
+      // 성공적으로 요청을 보낸 경우 팝업 표시
+      setShowPopup(true);
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      // 오류 처리 로직 추가
+    }
   };
 
-  // 프로젝트 멤버에 대한 상태 변수들
-  const [projectMember, setProjectMember] = useState("");
-  const [selectedParts, setSelectedParts] = useState([]);
-  const [projectMembers, setProjectMembers] = useState([]);
+  const handlePopupConfirm = () => {
+    setShowPopup(false);
+    navigate("/project"); // '/project' 경로로 이동
+  };
 
-  // 프로젝트 부분 선택을 처리하는 함수
   const handlePartSelect = (part) => {
     setSelectedParts((prevParts) => {
       if (prevParts.includes(part)) {
@@ -53,7 +76,6 @@ function Post() {
     });
   };
 
-  // 새로운 프로젝트 멤버를 추가하는 함수
   const handleAddMember = () => {
     if (projectMember.trim() !== "") {
       setProjectMembers((prevMembers) => [
@@ -65,29 +87,22 @@ function Post() {
     }
   };
 
-  //엔터키 눌렀을 떄 추가 버튼이랑 똑같은 역할 수행
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      //엔터키 기본동작 막기
       event.preventDefault();
       handleAddMember();
     }
   };
 
-  // 프로젝트 멤버를 제거하는 함수
   const handleRemoveMember = (index) => {
     setProjectMembers((prevMembers) =>
       prevMembers.filter((_, i) => i !== index)
     );
   };
 
-  //등록 완료 팝업 창
-  const [showPopup, setShowPopup] = useState(false);
-
   return (
     <div className="page">
       <Header />
-
       <div className="content">
         <Container className="dropdown-post">
           <Row>
@@ -96,15 +111,12 @@ function Post() {
             </Col>
           </Row>
         </Container>
-        {/* 프로젝트 세부 정보 입력 폼 */}
         <div className="project-register">
           <form onSubmit={handleSubmit}>
             <Container>
               <Row className="justify-content-md-center">
                 <Col>
-                  {/* 프로젝트 세부 정보 입력란 */}
                   <div className="text-container">
-                    {/* 프로젝트 이름 입력란 */}
                     <div className="input-container">
                       <label>
                         💡 프로젝트 이름<span className="required">*필수</span>
@@ -116,13 +128,11 @@ function Post() {
                         onChange={(e) => setProjectName(e.target.value)}
                       />
                     </div>
-                    {/* 프로젝트 설명 입력란 */}
                     <div className="input-container">
                       <label>
                         ✍🏻 프로젝트 한줄 소개
                         <span className="required">*필수</span>
                       </label>
-
                       <input
                         placeholder="프로젝트의 한줄 소개를 입력해주세요"
                         type="text"
@@ -130,7 +140,6 @@ function Post() {
                         onChange={(e) => setProjectDescription(e.target.value)}
                       />
                     </div>
-                    {/* 프로젝트 제작 배경 입력란 */}
                     <div className="input-container">
                       <label>🧾 프로젝트 제작 배경</label>
                       <textarea
@@ -139,7 +148,6 @@ function Post() {
                         onChange={(e) => setProjectBackground(e.target.value)}
                       />
                     </div>
-                    {/* 프로젝트 주요 기능과 특징 입력란 */}
                     <div className="input-container">
                       <label>🦾 프로젝트 주요 기능과 특징</label>
                       <textarea
@@ -152,13 +160,12 @@ function Post() {
                 </Col>
                 <Col md="auto"></Col>
                 <Col>
-                  {/* 프로젝트 이미지 업로드 입력란 */}
                   <div className="image-container">
                     <input
                       type="file"
                       id="fileInput"
                       onChange={handleProjectImageChange}
-                      style={{ display: "none" }} // 기본 파일 선택 UI를 숨김
+                      style={{ display: "none" }}
                     />
                     <div className="image-box">
                       {" "}
@@ -176,12 +183,10 @@ function Post() {
                 </Col>
               </Row>
             </Container>
-            {/* 프로젝트 하단 입력란 */}
             <div className="project-lower-container">
               <Container>
                 <Row className="justify-content-md-center">
                   <Col>
-                    {/* 프로젝트 배포 URL 입력란 */}
                     <div className="url-container">
                       <label>🔗 프로젝트 배포 URL</label>
                       <input
@@ -191,7 +196,6 @@ function Post() {
                         onChange={(e) => setDistribution(e.target.value)}
                       />
                     </div>
-                    {/* 프로젝트 Github URL 입력란 */}
                     <div className="url-container">
                       <label>
                         <IoLogoGithub />
@@ -207,7 +211,6 @@ function Post() {
                   </Col>
                   <Col md="auto"></Col>
                   <Col>
-                    {/* 프로젝트 멤버 입력란 */}
                     <div className="member-container">
                       <label>👥 함께한 팀원</label>
                       <div className="select-member">
@@ -222,7 +225,6 @@ function Post() {
                           onChange={(e) => setProjectMember(e.target.value)}
                           onKeyDown={handleKeyPress}
                         />
-
                         <button
                           className="add-member"
                           onClick={handleAddMember}
@@ -231,7 +233,6 @@ function Post() {
                         </button>
                       </div>
                       <div>
-                        {/* 멤버 추가 */}
                         {projectMembers.map((member, index) => (
                           <div key={index} className="member">
                             <span className="member-part">
@@ -255,16 +256,14 @@ function Post() {
               </Container>
             </div>
             <div className="submit-container">
-              <button
-                type="submit"
-                className="submit-button"
-                onClick={() => setShowPopup(true)}
-              >
+              <button type="button" className="submit-button">
                 등록하기
               </button>
             </div>
           </form>
-          {showPopup && <Popup action="등록" />}
+          {showPopup && (
+            <Popup action="등록" confirmAction={handlePopupConfirm} />
+          )}
         </div>
       </div>
     </div>
