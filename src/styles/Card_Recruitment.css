@@ -44,7 +44,7 @@
 .Card_Recruitment-title {
   width: 100%;
   height: 28px;
-  font-size: 24px;
+  font-size: 23px;
   font-weight: bold;
 
   margin-top: -8px;
@@ -101,7 +101,7 @@
 .Card_Recruitment-company {
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin-bottom: 6px;
 }
 
 .company-profile-icon {

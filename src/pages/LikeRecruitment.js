@@ -1,12 +1,29 @@
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import CardRecruitment from "../components/Card_Recruitment"; 
 import "../styles/LikeRecruitment.css";
+
+const API_BASE_URL = 'https://likelion-running.store/api';
 
 function LikeRecruitment() {
   const navigate = useNavigate();
+  const [likedJobs, setLikedJobs] = useState([]); 
 
+  useEffect(() => {
+    const fetchLikedJobs = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/jobs/like`);
+        setLikedJobs(response.data); 
+      } catch (error) {
+        console.error("Failed to fetch liked jobs:", error);
+      }
+    };
+
+    fetchLikedJobs();
+  }, []);
   const handleProjectLike = () => {
     navigate("/like/project");
   };
@@ -32,7 +49,22 @@ function LikeRecruitment() {
             </p>
           </div>
           <div className="Like-list">
-            <div className="Like-list-cards">해당 컴포넌트 삽입해주세요 !</div>
+            <div className="Like-list-cards">
+              {likedJobs.map((job) => (
+                <CardRecruitment
+                  key={job.id}
+                  logoUrl={job.logoUrl}
+                  companyName={job.companyName}
+                  viewCount={job.viewCount}
+                  applicantsCount={job.applicantsCount}
+                  jobTitle={job.jobTitle}
+                  type={job.type}
+                  deadLine={job.deadLine}
+                  level={job.level}
+                  likeCount={job.likeCount}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
