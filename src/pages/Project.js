@@ -26,7 +26,7 @@ function Project() {
 
   useEffect(() => {
     axios
-      .get("https://likelion-running.store/api/project/search/all")
+      .get("http://localhost:8080/api/project/search/all")
       .then((response) => {
         setProjects(response.data);
       })
@@ -36,7 +36,7 @@ function Project() {
 
     // 인기 프로젝트 목록 가져오기
     axios
-      .get("https://likelion-running.store/api/project/popular/list")
+      .get("http://localhost:8080/api/project/popular/list")
       .then((response) => {
         setPopularProjects(response.data);
       })
@@ -63,11 +63,11 @@ function Project() {
 
   // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
   // const BurnprojectCards = Array.from({ length: 7 }, (_, index) => <Card_Burn_Project key={index} />);
-  const projectCards = projects.map((project) => <Card_Project key={project.bno} title={project.title} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectCards = projects.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
 
   const BurnprojectCards = popularProjects.map((project) => (
     <SwiperSlide key={project.bno}>
-      <Card_Burn_Project title={project.title} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />
+      <Card_Burn_Project projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />
     </SwiperSlide>
   ));
 

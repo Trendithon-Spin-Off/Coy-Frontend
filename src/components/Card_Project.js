@@ -7,7 +7,7 @@ import Like from "../img/like.png";
 import Arrow from "../img/arrow.png";
 import Default from "../img/NonProject.png";
 
-function Card_Project({ title, description, category, boardLike, onClick }) {
+function Card_Project({ projectName, description, category, boardLike, onClick }) {
   return (
     <div className="Card-Project" onClick={onClick} style={{ cursor: "pointer" }}>
       <div className="Card-Project-img">
@@ -20,7 +20,7 @@ function Card_Project({ title, description, category, boardLike, onClick }) {
               <p>{category}</p>
             </div>
             <div className="Card-Project-text">
-              <p className="Card-Project-title">{title}</p>
+              <p className="Card-Project-title">{projectName}</p>
               <p className="Card-Project-description">{description}</p>
             </div>
           </div>
@@ -43,7 +43,7 @@ function Card_Project({ title, description, category, boardLike, onClick }) {
 }
 
 Card_Project.propTypes = {
-  title: PropTypes.string.isRequired, // 프로젝트 제목
+  projectName: PropTypes.string.isRequired, // 프로젝트 제목
   description: PropTypes.string.isRequired, // 프로젝트 한줄 소개
   category: PropTypes.string.isRequired, // 프로젝트 카테고리
   boardLike: PropTypes.number.isRequired, // 프로젝트의 게시물 좋아요 수

@@ -20,11 +20,12 @@ const Post = () => {
   const [projectDescription, setProjectDescription] = useState("");
   const [projectBackground, setProjectBackground] = useState("");
   const [projectFeatures, setProjectFeatures] = useState("");
-  const [projectImage, setProjectImage] = useState(null);
+  const [projectImage, setProjectImage] = useState("");
   const [selectedFileName, setSelectedFileName] = useState("");
   const [distribution, setDistribution] = useState("");
   const [github, setGithub] = useState("");
   const [projectMember, setProjectMember] = useState("");
+
   const [selectedParts, setSelectedParts] = useState([]);
   const [projectMembers, setProjectMembers] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -39,29 +40,30 @@ const Post = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
 
-    const formData = new FormData();
-    formData.append("category", category);
-    formData.append("projectName", projectName);
-    formData.append("projectDescription", projectDescription);
-    formData.append("projectBackground", projectBackground);
-    formData.append("projectFeatures", projectFeatures);
-    formData.append("distribution", distribution);
-    formData.append("github", github);
-    formData.append("projectMembers", JSON.stringify(projectMembers)); // JSON 형태로 변환하여 추가
-    formData.append("projectImage", projectImage);
-    axios({
-      method: "post",
-      url: "http://localhost:8080/api/project/write",
-      data: formData,
-    })
-      .then((result) => {
-        console.log("요청성공");
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log("요청실패");
-        console.log(error);
+    const requestData = {
+      category: category,
+      projectName: projectName,
+      projectDescription: projectDescription,
+      projectBackground: projectBackground,
+      projectFeatures: projectFeatures,
+      distribution: distribution,
+      github: github,
+      projectMembers: projectMembers,
+      projectImage: projectImage,
+    };
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/project/write", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+      console.log("요청 성공");
+      console.log(response);
+    } catch (error) {
+      console.log("요청 실패");
+      console.log(error);
+    }
   };
 
   const onClickPost = (e) => {
@@ -86,10 +88,7 @@ const Post = () => {
 
   const handleAddMember = () => {
     if (projectMember.trim() !== "") {
-      setProjectMembers((prevMembers) => [
-        ...prevMembers,
-        { parts: selectedParts, member: projectMember },
-      ]);
+      setProjectMembers((prevMembers) => [...prevMembers, { parts: selectedParts, member: projectMember }]);
       setProjectMember("");
       setSelectedParts([]);
     }
@@ -103,9 +102,7 @@ const Post = () => {
   };
 
   const handleRemoveMember = (index) => {
-    setProjectMembers((prevMembers) =>
-      prevMembers.filter((_, i) => i !== index)
-    );
+    setProjectMembers((prevMembers) => prevMembers.filter((_, i) => i !== index));
   };
 
   return (
@@ -129,40 +126,22 @@ const Post = () => {
                       <label>
                         💡 프로젝트 이름<span className="required">*필수</span>
                       </label>
-                      <input
-                        placeholder="프로젝트의 이름을 입력해주세요"
-                        type="text"
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
-                      />
+                      <input placeholder="프로젝트의 이름을 입력해주세요" type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)} />
                     </div>
                     <div className="input-container">
                       <label>
                         ✍🏻 프로젝트 한줄 소개
                         <span className="required">*필수</span>
                       </label>
-                      <input
-                        placeholder="프로젝트의 한줄 소개를 입력해주세요"
-                        type="text"
-                        value={projectDescription}
-                        onChange={(e) => setProjectDescription(e.target.value)}
-                      />
+                      <input placeholder="프로젝트의 한줄 소개를 입력해주세요" type="text" value={projectDescription} onChange={(e) => setProjectDescription(e.target.value)} />
                     </div>
                     <div className="input-container">
                       <label>🧾 프로젝트 제작 배경</label>
-                      <textarea
-                        placeholder="프로젝트를 제작하게 된 배경을 입력해주세요"
-                        value={projectBackground}
-                        onChange={(e) => setProjectBackground(e.target.value)}
-                      />
+                      <textarea placeholder="프로젝트를 제작하게 된 배경을 입력해주세요" value={projectBackground} onChange={(e) => setProjectBackground(e.target.value)} />
                     </div>
                     <div className="input-container">
                       <label>🦾 프로젝트 주요 기능과 특징</label>
-                      <textarea
-                        placeholder="프로젝트의 주요 기능과 특징을 입력해주세요"
-                        value={projectFeatures}
-                        onChange={(e) => setProjectFeatures(e.target.value)}
-                      />
+                      <textarea placeholder="프로젝트의 주요 기능과 특징을 입력해주세요" value={projectFeatures} onChange={(e) => setProjectFeatures(e.target.value)} />
                     </div>
                   </div>
                 </Col>
@@ -170,20 +149,10 @@ const Post = () => {
                 <Col>
                   <div className="image-container">
                     <label htmlFor="fileInput" />
-                    <input
-                      type="file"
-                      id="fileInput"
-                      accept="image/*"
-                      onChange={handleProjectImageChange}
-                      style={{ display: "none" }}
-                    />
+                    <input type="file" id="fileInput" accept="image/*" onChange={handleProjectImageChange} style={{ display: "none" }} />
                     <div className="image-box">
                       {" "}
-                      <button
-                        onClick={() =>
-                          document.getElementById("fileInput").click()
-                        }
-                      >
+                      <button onClick={() => document.getElementById("fileInput").click()}>
                         <BsUpload />
                         {selectedFileName || "  브로셔/스크린샷 업로드"}
                       </button>
@@ -199,24 +168,14 @@ const Post = () => {
                   <Col>
                     <div className="url-container">
                       <label>🔗 프로젝트 배포 URL</label>
-                      <input
-                        placeholder="프로젝트의 이름을 입력해주세요"
-                        type="text"
-                        value={distribution}
-                        onChange={(e) => setDistribution(e.target.value)}
-                      />
+                      <input placeholder="프로젝트의 이름을 입력해주세요" type="text" value={distribution} onChange={(e) => setDistribution(e.target.value)} />
                     </div>
                     <div className="url-container">
                       <label>
                         <IoLogoGithub />
                         프로젝트 Github
                       </label>
-                      <input
-                        placeholder="프로젝트의 한줄 소개를 입력해주세요"
-                        type="text"
-                        value={github}
-                        onChange={(e) => setGithub(e.target.value)}
-                      />
+                      <input placeholder="프로젝트의 한줄 소개를 입력해주세요" type="text" value={github} onChange={(e) => setGithub(e.target.value)} />
                     </div>
                   </Col>
                   <Col md="auto"></Col>
@@ -224,21 +183,9 @@ const Post = () => {
                     <div className="member-container">
                       <label>👥 함께한 팀원</label>
                       <div className="select-member">
-                        <DropdownPart
-                          selectedParts={selectedParts}
-                          onPartSelect={handlePartSelect}
-                        />
-                        <input
-                          placeholder="같이 진행한 팀원의 아이디를 입력해주세요"
-                          type="text"
-                          value={projectMember}
-                          onChange={(e) => setProjectMember(e.target.value)}
-                          onKeyDown={handleKeyPress}
-                        />
-                        <button
-                          className="add-member"
-                          onClick={handleAddMember}
-                        >
+                        <DropdownPart selectedParts={selectedParts} onPartSelect={handlePartSelect} />
+                        <input placeholder="같이 진행한 팀원의 아이디를 입력해주세요" type="text" value={projectMember} onChange={(e) => setProjectMember(e.target.value)} onKeyDown={handleKeyPress} />
+                        <button className="add-member" onClick={handleAddMember}>
                           추가
                         </button>
                       </div>
@@ -248,10 +195,7 @@ const Post = () => {
                             <span className="member-part">{member.parts}</span>{" "}
                             <div className="member-id">
                               <span>{member.member}</span>
-                              <button
-                                className="close-button"
-                                onClick={() => handleRemoveMember(index)}
-                              >
+                              <button className="close-button" onClick={() => handleRemoveMember(index)}>
                                 <IoIosClose />
                               </button>{" "}
                             </div>
@@ -264,18 +208,12 @@ const Post = () => {
               </Container>
             </div>
             <div className="submit-container">
-              <button
-                type="button"
-                className="submit-button"
-                onClick={onClickPost}
-              >
+              <button type="button" className="submit-button" onClick={onClickPost}>
                 등록하기
               </button>
             </div>
           </form>
-          {showPopup && (
-            <Popup action="등록" confirmAction={handlePopupConfirm} />
-          )}
+          {showPopup && <Popup action="등록" confirmAction={handlePopupConfirm} />}
         </div>
       </div>
     </div>
