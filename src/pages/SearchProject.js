@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Project from "../components/Card_Project";
@@ -7,6 +9,22 @@ import "../styles/SearchProject.css";
 
 function SearchProject() {
   const { searchData } = useParams();
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://likelion-running.store/api/project/search/list?&searchKeyword=${searchData}`);
+        setSearchResults(response.data.content);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    };
+
+    if (searchData.trim() !== "") {
+      fetchData();
+    }
+  }, [searchData]);
 
   const navigate = useNavigate();
 
@@ -22,7 +40,12 @@ function SearchProject() {
     }
   };
 
-  const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+  const handleToProjectLink = (bno) => {
+    navigate(`/project/read/${bno}`);
+  };
+
+  // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+  const projectCards = searchResults.map((project) => <Card_Project key={project.bno} title={project.title} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
 
   return (
     <div className="page">
@@ -33,7 +56,7 @@ function SearchProject() {
             🔎'{searchData}'에 대한 검색 결과
           </p>
           <p div className="Search-sub">
-            n개의 검색결과를 발견했어요.
+            {searchResults.length}개의 검색결과를 발견했어요.
           </p>
         </div>
         <div className="Search-content">

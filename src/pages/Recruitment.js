@@ -35,7 +35,7 @@ function Recruitment() {
     <div className="page">
       <Header />
       <div className="content">
-        <div className="Banner">
+        <div className="Banner-Recruit">
           <p className="Banner-sub">사람인이 제공하는 최신 공고로 새로운 기회 탐색!</p>
           <p className="Banner-title">채용 공고</p>
         </div>

@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "axios";
 import SwiperCore from "swiper";
 import { Navigation, Scrollbar, Pagination } from "swiper/modules";
 import Header from "../components/Header";
@@ -20,9 +21,36 @@ SwiperCore.use([Navigation, Scrollbar, Pagination]);
 
 function Project() {
   const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
+  const [popularProjects, setPopularProjects] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://likelion-running.store/api/project/search/all")
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+      });
+
+    // 인기 프로젝트 목록 가져오기
+    axios
+      .get("https://likelion-running.store/api/project/popular/list")
+      .then((response) => {
+        setPopularProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching popular projects:", error);
+      });
+  }, []);
 
   const handleToPostLink = () => {
     navigate("/project/post");
+  };
+
+  const handleToProjectLink = (bno) => {
+    navigate(`/project/read/${bno}`);
   };
 
   // useState를 사용하여 현재 활성화된 슬라이드의 인덱스를 추적
@@ -33,12 +61,13 @@ function Project() {
     setActiveIndex(swiper.activeIndex);
   };
 
-  const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+  // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
   // const BurnprojectCards = Array.from({ length: 7 }, (_, index) => <Card_Burn_Project key={index} />);
+  const projectCards = projects.map((project) => <Card_Project key={project.bno} title={project.title} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
 
-  const BurnprojectCards = Array.from({ length: 7 }, (_, index) => (
-    <SwiperSlide key={index}>
-      <Card_Burn_Project />
+  const BurnprojectCards = popularProjects.map((project) => (
+    <SwiperSlide key={project.bno}>
+      <Card_Burn_Project title={project.title} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />
     </SwiperSlide>
   ));
 

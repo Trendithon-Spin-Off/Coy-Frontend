@@ -46,7 +46,7 @@ function App() {
           <Route exact path="/project" element={<Project />} />
           <Route exact path="/project/post" element={<Post />} />
           <Route exact path="/project/modify" element={<Modify />} />
-          <Route exact path="/project/read" element={<Read />} />
+          <Route exact path="/project/read/:bno" element={<Read />} />
 
           {/* 채용 공고  */}
           <Route exact path="/recruitment" element={<Recruitment />} />
