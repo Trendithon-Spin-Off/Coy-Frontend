@@ -13,9 +13,9 @@ import Popup from "../components/Popup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Post() {
+const Post = () => {
   const navigate = useNavigate();
-
+  const [category, setCategory] = useState("");
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectBackground, setProjectBackground] = useState("");
@@ -31,6 +31,7 @@ function Post() {
 
   const handleProjectImageChange = (e) => {
     const imageFile = e.target.files[0];
+
     setProjectImage(imageFile);
     setSelectedFileName(imageFile ? imageFile.name : "");
   };
@@ -38,27 +39,34 @@ function Post() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
 
-    // form 데이터 생성
     const formData = new FormData();
+    formData.append("category", category);
     formData.append("projectName", projectName);
     formData.append("projectDescription", projectDescription);
     formData.append("projectBackground", projectBackground);
     formData.append("projectFeatures", projectFeatures);
-    formData.append("projectImage", projectImage);
     formData.append("distribution", distribution);
     formData.append("github", github);
     formData.append("projectMembers", JSON.stringify(projectMembers)); // JSON 형태로 변환하여 추가
+    formData.append("projectImage", projectImage);
+    axios({
+      method: "post",
+      url: "http://localhost:8080/api/project/write",
+      data: formData,
+    })
+      .then((result) => {
+        console.log("요청성공");
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log("요청실패");
+        console.log(error);
+      });
+  };
 
-    try {
-      // 서버로 POST 요청 보내기
-      const response = await axios.post("http://localhost:3000/post", formData);
-
-      // 성공적으로 요청을 보낸 경우 팝업 표시
-      setShowPopup(true);
-    } catch (error) {
-      console.error("Error submitting data:", error);
-      // 오류 처리 로직 추가
-    }
+  const onClickPost = (e) => {
+    e.preventDefault();
+    handleSubmit(e);
   };
 
   const handlePopupConfirm = () => {
@@ -69,9 +77,9 @@ function Post() {
   const handlePartSelect = (part) => {
     setSelectedParts((prevParts) => {
       if (prevParts.includes(part)) {
-        return prevParts.filter((p) => p !== part);
+        return "";
       } else {
-        return [...prevParts, part];
+        return part;
       }
     });
   };
@@ -107,7 +115,7 @@ function Post() {
         <Container className="dropdown-post">
           <Row>
             <Col>
-              <DropdownPost />
+              <DropdownPost category={category} setCategory={setCategory} />
             </Col>
           </Row>
         </Container>
@@ -161,9 +169,11 @@ function Post() {
                 <Col md="auto"></Col>
                 <Col>
                   <div className="image-container">
+                    <label htmlFor="fileInput" />
                     <input
                       type="file"
                       id="fileInput"
+                      accept="image/*"
                       onChange={handleProjectImageChange}
                       style={{ display: "none" }}
                     />
@@ -235,9 +245,7 @@ function Post() {
                       <div>
                         {projectMembers.map((member, index) => (
                           <div key={index} className="member">
-                            <span className="member-part">
-                              {member.parts.join(", ")}
-                            </span>{" "}
+                            <span className="member-part">{member.parts}</span>{" "}
                             <div className="member-id">
                               <span>{member.member}</span>
                               <button
@@ -256,7 +264,11 @@ function Post() {
               </Container>
             </div>
             <div className="submit-container">
-              <button type="button" className="submit-button">
+              <button
+                type="button"
+                className="submit-button"
+                onClick={onClickPost}
+              >
                 등록하기
               </button>
             </div>
@@ -268,6 +280,6 @@ function Post() {
       </div>
     </div>
   );
-}
+};
 
 export default Post;
