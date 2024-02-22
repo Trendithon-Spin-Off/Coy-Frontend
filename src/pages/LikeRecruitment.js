@@ -54,7 +54,7 @@ function LikeRecruitment() {
           <div className="Like-list">
             <div className="Like-list-cards">
               {likedJobs.map((job) => (
-                <CardRecruitment
+                <Card_Recruitment
                   key={job.id}
                   logoUrl={job.logoUrl}
                   companyName={job.companyName}

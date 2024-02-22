@@ -73,8 +73,6 @@ function SearchRecruitment() {
     navigate(`/search/recruitment/${searchData.trim()}`);
   };
 
-  const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
-
   return (
     <div className="page">
       <Header />
