@@ -120,7 +120,7 @@ function Header() {
     }
   }, []);
 
-  const handleLogout = ({ onClose }) => {
+  const handleLogout = () => {
     // 로컬 스토리지에서 토큰 삭제
     localStorage.removeItem("token");
     localStorage.removeItem("memberId");
@@ -130,9 +130,6 @@ function Header() {
 
     // 강제로 페이지 새로고침
     window.location.reload();
-
-    // 모달 닫기
-    onClose();
   };
 
   // 드롭다운 관련 코드
