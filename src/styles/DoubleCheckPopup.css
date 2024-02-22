@@ -1,0 +1,35 @@
+.information-icon {
+  color: red;
+  margin-right: 10px;
+}
+.delete-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.delete-cancle {
+  width: fit-content; /* 내용에 맞게 버튼의 너비를 조정합니다. */
+  padding: 10px 40px; /* 버튼의 내부 여백을 조정합니다. */
+  margin: auto; /* 버튼을 수평으로 가운데 정렬합니다. */
+  color: #439aff;
+  border: 1px solid #439aff;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.delete-verify {
+  width: fit-content; /* 내용에 맞게 버튼의 너비를 조정합니다. */
+  padding: 10px 40px; /* 버튼의 내부 여백을 조정합니다. */
+  margin: auto; /* 버튼을 수평으로 가운데 정렬합니다. */
+  color: red;
+  border: 1px solid red;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.delete-verify:hover {
+  background-color: red;
+  color: white;
+}
