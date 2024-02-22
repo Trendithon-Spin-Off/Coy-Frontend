@@ -34,14 +34,8 @@ function SearchRecruitment() {
       setLoading(true); 
       setError('');
 
-      const now = formatDateTimeForServer(new Date());
-
       try {
-        const response = await axios.get(`${API_BASE_URL}/jobs`, {
-          params: {
-            now: now, 
-          }
-        });
+        const response = await axios.get(`${API_BASE_URL}/jobs`);
         console.log("Received response data:", response.data);
         setJobs(response.data);
       } catch (error) {
@@ -63,7 +57,7 @@ function SearchRecruitment() {
 
     fetchJobs();
   }, []);
-
+  
   return (
     <div className="page">
       <Header />
@@ -83,16 +77,7 @@ function SearchRecruitment() {
                 {popularJobs.map((job) => (
                   <Card_Burn_Recruitment
                   key={job.id}
-                  id={job.id}
-                  logoUrl={job.logoUrl}
-                  companyName={job.companyName}
-                  viewCount={job.viewCount}
-                  applicantsCount={job.applicantsCount}
-                  jobTitle={job.jobTitle}
-                  type={job.type}
-                  deadLine={job.deadLine}
-                  level={job.level}
-                  likeCount={job.likeCount}
+      job={job}
                   />
                 ))}
               </div>
@@ -107,23 +92,23 @@ function SearchRecruitment() {
               </div>
             </div>
             <div className="Project-cards">
-              <div className="Project-cards-list">
-                {jobs.map((job) => (
-                  <CardRecruitment
-                    key={job.id}
-                    id={job.id}
-                    logoUrl={job.logoUrl}
-                    companyName={job.companyName}
-                    viewCount={job.viewCount}
-                    applicantsCount={job.applicantsCount}
-                    jobTitle={job.jobTitle}
-                    type={job.type}
-                    deadLine={job.deadLine}
-                    level={job.level}
-                    likeCount={job.likeCount}
-                  />
-                ))}
-              </div>
+            <div className="Project-cards-list">
+  {jobs.map((job) => (
+    <CardRecruitment
+      key={job.id}
+      id={job.id}
+      logoUrl={job.logoUrl}
+      companyName={job.companyName}
+      viewCount={job.viewCount}
+      applicantsCount={job.applicantsCount}
+      jobTitle={job.jobTitle}
+      type={job.type}
+      deadLine={job.deadLine}
+      level={job.level}
+      likeCount={job.likeCount}
+    />
+  ))}
+</div>
             </div>
           </div>
         </div>

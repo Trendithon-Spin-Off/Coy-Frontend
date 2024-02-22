@@ -39,6 +39,7 @@ function CardRecruitment({
     const newLikeStatus = !liked;
     setLiked(newLikeStatus);
   };
+  
 
   const API_BASE_URL = 'https://likelion-running.store/api'
 

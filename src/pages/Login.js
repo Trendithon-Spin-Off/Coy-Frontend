@@ -28,6 +28,7 @@ function Login() {
       if (response.data && response.data.token) {
         console.log("로그인 성공", response.data);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("memberId", memberId);
         navigate("/");
       } else {
         alert(`로그인 실패: ${response.data.message || "응답이 올바르지 않습니다."}`);
