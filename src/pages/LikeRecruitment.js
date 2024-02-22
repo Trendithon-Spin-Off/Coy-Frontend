@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import CardRecruitment from "../components/Card_Recruitment"; 
+import Card_Recruitment from "../components/Card_Recruitment";
+
 import "../styles/LikeRecruitment.css";
 
 const API_BASE_URL = 'https://likelion-running.store/api';
@@ -31,6 +32,8 @@ function LikeRecruitment() {
   const handleRecruitLike = () => {
     navigate("/like/recruitment");
   };
+
+  const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
 
   return (
     <div className="page">

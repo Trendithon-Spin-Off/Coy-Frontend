@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import { Navigation, Scrollbar, Pagination } from "swiper/modules";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from 'axios';
 import CardRecruitment from "../components/Card_Recruitment";
 import Card_Burn_Recruitment from "../components/Card_Burn_Recruitment";
+
 import "../styles/Recruitment.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+SwiperCore.use([Navigation, Scrollbar, Pagination]);
 
 const API_BASE_URL = 'https://likelion-running.store/api'
 
@@ -62,7 +70,7 @@ function SearchRecruitment() {
     <div className="page">
       <Header />
       <div className="content">
-        <div className="Banner">
+        <div className="Banner-Recruit">
           <p className="Banner-sub">사람인이 제공하는 최신 공고로 새로운 기회 탐색!</p>
           <p className="Banner-title">채용 공고</p>
         </div>
@@ -73,10 +81,22 @@ function SearchRecruitment() {
               <p className="Burning-sub">지금 뜨고 있는 채용 공고를 구경해 보세요!</p>
             </div>
             <div className="Burning-card-list">
-              <div className="Burning-list">
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
+              <div className="Project-cards-list">
+                <Swiper
+                  className="cardSwiper"
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  scrollbar={{ draggable: true }}
+                  navigation
+                  pagination={{ clickable: true }}
+                  breakpoints={{ 1730: { slidesPerView: 4 }, 1450: { slidePreView: 3 }, 1160: { slidePreView: 2 } }}
+                  style={{
+                    "--swiper-pagination-color": "#439AFF",
+                    "--swiper-navigation-color": "rgb(0,0,0,0)",
+                  }}
+                >
+                  {BurnrecruitCards}
+                </Swiper>
               </div>
             </div>
           </div>

@@ -26,3 +26,7 @@ a:visited {
 p {
   margin: 0;
 }
+
+html {
+  height: 100%;
+}

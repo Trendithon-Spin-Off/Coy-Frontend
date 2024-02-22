@@ -21,6 +21,8 @@ function MyPage() {
     }
   };
 
+  const projectProfileCards = Array.from({ length: 10 }, (_, index) => <Card_Profile_Project key={index} />);
+
   return (
     <div className="page">
       <Header />
@@ -53,14 +55,7 @@ function MyPage() {
               👩🏻‍💻프로젝트
             </p>
             <div className="Profile-project-list">
-              <div className="Profile-project-list-cards">
-                <Card_Profile_Project />
-                <Card_Profile_Project />
-                <Card_Profile_Project />
-                <Card_Profile_Project />
-                <Card_Profile_Project />
-                <Card_Profile_Project />
-              </div>
+              <div className="Profile-project-list-cards">{projectProfileCards}</div>
             </div>
           </div>
         </div>

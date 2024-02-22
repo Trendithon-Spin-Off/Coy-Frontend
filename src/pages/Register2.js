@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Header from "../components/Header";
 import "../styles/Register2.css";
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import { IoChevronDownOutline, IoChevronUpOutline, IoChevronForward } from "react-icons/io5";
 
 function Register2() {
   const location = useLocation();
   const memberId = location.state?.id;
-  const [job, setJob] = useState('');
-  const [selectedSubJob, setSelectedSubJob] = useState('');
+  const [job, setJob] = useState("");
+  const [selectedSubJob, setSelectedSubJob] = useState("");
   const [isJobDropdownOpen, setIsJobDropdownOpen] = useState(false);
   const [isSubJobDropdownOpen, setIsSubJobDropdownOpen] = useState(false);
   const [showStackSelection, setShowStackSelection] = useState(false);
   const [selectedStacks, setSelectedStacks] = useState([]);
-  const [introduce, setIntroduce] = useState('');
-  const [link, setLink] = useState('');
+  const [introduce, setIntroduce] = useState("");
+  const [link, setLink] = useState("");
 
-  const API_BASE_URL = 'http://localhost:8080/api'; 
+  const API_BASE_URL = "https://likelion-running.store/api";
 
   const handleSubmit = async () => {
     console.log("memberId:", memberId);
@@ -27,11 +27,11 @@ function Register2() {
       job: job,
       specificDuty: selectedSubJob,
       link: link,
-      technics: selectedStacks
+      technics: selectedStacks,
     };
-  
+
     console.log("Sending payload:", payload);
-  
+
     try {
       const response = await axios.post(`${API_BASE_URL}/information/add`, payload);
       console.log(response.data);
@@ -39,15 +39,14 @@ function Register2() {
       console.error("Error submitting form:", error);
     }
   };
-  
 
   const isFormFilled = introduce && job && selectedSubJob && selectedStacks.length > 0;
 
   const jobOptions = {
-    "프론트엔드": ["IOS", "안드로이드", "웹프론트엔드", "웹퍼블리셔"],
-    "백엔드": ["웹서버", "블록체인", "AI", "DB/빅데이터/DS", "게임 서버"],
-    "디자인": ["그래픽 디자인", "프로덕트 디자인", "3D 디자인", "모션/이펙트디자인"],
-    "기획": ["기획"]
+    프론트엔드: ["IOS", "안드로이드", "웹프론트엔드", "웹퍼블리셔"],
+    백엔드: ["웹서버", "블록체인", "AI", "DB/빅데이터/DS", "게임 서버"],
+    디자인: ["그래픽 디자인", "프로덕트 디자인", "3D 디자인", "모션/이펙트디자인"],
+    기획: ["기획"],
   };
 
   const [subJobs, setSubJobs] = useState([]);
@@ -59,41 +58,49 @@ function Register2() {
 
     const handleMouseLeave = () => setShowTooltip(false);
 
-    const displayText = selectedStacks.length > 3
-      ? (
+    const displayText =
+      selectedStacks.length > 3 ? (
         <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          {selectedStacks.slice(0, 3).join(', ')} +{selectedStacks.length - 3}
+          {selectedStacks.slice(0, 3).join(", ")} +{selectedStacks.length - 3}
         </span>
-      ) : selectedStacks.join(', ');
+      ) : (
+        selectedStacks.join(", ")
+      );
 
     return (
-      <div style={{
-        color: 'grey',
-        fontSize: '14px',
-        textAlign: 'left',
-        marginTop: '10px',
-        marginLeft: '15px',
-        position: 'relative'
-      }}>
+      <div
+        style={{
+          color: "grey",
+          fontSize: "14px",
+          textAlign: "left",
+          marginTop: "10px",
+          marginLeft: "15px",
+          position: "relative",
+        }}
+      >
         {selectedStacks.length > 0 ? displayText : "아직 선택한 스택이 없어요."}
         {showTooltip && selectedStacks.length > 3 && (
-          <div style={{
-            position: 'absolute',
-            top: '20px',
-            right: '130px',
-            backgroundColor: 'white',
-            border: '1px solid #ccc',
-            padding: '5px',
-            borderRadius: '5px',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '5px',
-            width: '130px',
-            zIndex: 1000,
-          }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "130px",
+              backgroundColor: "white",
+              border: "1px solid #ccc",
+              padding: "5px",
+              borderRadius: "5px",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "5px",
+              width: "130px",
+              zIndex: 1000,
+            }}
+          >
             {selectedStacks.slice(3).map((stack, index) => (
-              <span key={index} style={{ flex: '1 0 calc(50% - 5px)', textAlign: 'center' }}>{stack}</span>
+              <span key={index} style={{ flex: "1 0 calc(50% - 5px)", textAlign: "center" }}>
+                {stack}
+              </span>
             ))}
           </div>
         )}
@@ -109,14 +116,14 @@ function Register2() {
     if (!selectedStacks.includes(stack)) {
       setSelectedStacks([...selectedStacks, stack]);
     } else {
-      setSelectedStacks(selectedStacks.filter(s => s !== stack));
+      setSelectedStacks(selectedStacks.filter((s) => s !== stack));
     }
   };
 
   const handleJobSelect = (selectedJob) => {
     setJob(selectedJob);
     setSubJobs(jobOptions[selectedJob] || []);
-    setSelectedSubJob('');
+    setSelectedSubJob("");
     setIsJobDropdownOpen(false);
     setIsSubJobDropdownOpen(false);
   };
@@ -144,36 +151,26 @@ function Register2() {
           <div className="Nelogin-box">
             <h2>추가 정보 입력</h2>
             <p>추가 정보를 입력하면 더 많은 기회를 얻을 수 있어요.</p>
-            
+
             <div className="Neinput-container">
               <p>한줄 소개</p>
-              <input
-                className="Neunderline-input"
-                type="text"
-                placeholder="한줄 소개를 입력해주세요"
-                value={introduce}
-                onChange={(e) => setIntroduce(e.target.value)}
-              />
+              <input className="Neunderline-input" type="text" placeholder="한줄 소개를 입력해주세요" value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
             </div>
 
             <div className="Neinput-container">
               <p className="Nepassword-label">ㅤ(희망) 직무 선택</p>
-              <div className="Neflex-container" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+              <div className="Neflex-container" style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
                 <div className="input-container dropdown-container job-dropdown">
-                  <button className={`job-select-btn ${job ? 'selected' : ''}`} onClick={toggleJobDropdown}>
+                  <button className={`job-select-btn ${job ? "selected" : ""}`} onClick={toggleJobDropdown}>
                     {job || "직무 선택"}
                     {isJobDropdownOpen ? <IoChevronUpOutline className="dropdown-arrow" /> : <IoChevronDownOutline className="dropdown-arrow" />}
                   </button>
                   {isJobDropdownOpen && (
                     <ul className="dropdown-list">
                       {Object.keys(jobOptions).map((jobOption) => (
-                        <li 
-                          key={jobOption} 
-                          onClick={() => handleJobSelect(jobOption)} 
-                          className={`dropdown-item ${job === jobOption ? 'selected' : ''}`}
-                        >
+                        <li key={jobOption} onClick={() => handleJobSelect(jobOption)} className={`dropdown-item ${job === jobOption ? "selected" : ""}`}>
                           {jobOption}
-                          <span className={`checkmark-circle ${job === jobOption ? 'selected' : ''}`}></span>
+                          <span className={`checkmark-circle ${job === jobOption ? "selected" : ""}`}></span>
                         </li>
                       ))}
                     </ul>
@@ -181,20 +178,16 @@ function Register2() {
                 </div>
 
                 <div className="input-container dropdown-container ">
-                  <button className={`job-select-btn ${selectedSubJob ? 'selected' : ''}`} onClick={toggleSubJobDropdown}>
+                  <button className={`job-select-btn ${selectedSubJob ? "selected" : ""}`} onClick={toggleSubJobDropdown}>
                     {selectedSubJob || "세부직무 선택"}
                     {isSubJobDropdownOpen ? <IoChevronUpOutline className="dropdown-arrow" /> : <IoChevronDownOutline className="dropdown-arrow" />}
                   </button>
                   {isSubJobDropdownOpen && (
                     <ul className="dropdown-list">
                       {subJobs.map((subJob) => (
-                        <li 
-                          key={subJob} 
-                          onClick={() => handleSubJobSelect(subJob)} 
-                          className={`dropdown-item ${selectedSubJob === subJob ? 'selected' : ''}`}
-                        >
+                        <li key={subJob} onClick={() => handleSubJobSelect(subJob)} className={`dropdown-item ${selectedSubJob === subJob ? "selected" : ""}`}>
                           {subJob}
-                          <span className={`checkmark-circle ${selectedSubJob === subJob ? 'selected' : ''}`}></span>
+                          <span className={`checkmark-circle ${selectedSubJob === subJob ? "selected" : ""}`}></span>
                         </li>
                       ))}
                     </ul>
@@ -203,36 +196,38 @@ function Register2() {
               </div>
             </div>
 
-            <div className="Neinput-container" style={{ marginTop: '-10px' }}>
-              <div className="Neflex-container" style={{ alignItems: 'center', justifyContent: 'space-between', display: 'flex', width: '100%' }}>
-                <p className="Nepassword-label" style={{ marginBottom: 0, marginRight: 'auto' }}>ㅤ사용 가능한 스택</p>
-                <span onClick={toggleStackSelection} style={{ cursor: 'pointer', color: 'gray', display: 'inline-flex', alignItems: 'center' }}>
+            <div className="Neinput-container" style={{ marginTop: "-10px" }}>
+              <div className="Neflex-container" style={{ alignItems: "center", justifyContent: "space-between", display: "flex", width: "100%" }}>
+                <p className="Nepassword-label" style={{ marginBottom: 0, marginRight: "auto" }}>
+                  ㅤ사용 가능한 스택
+                </p>
+                <span onClick={toggleStackSelection} style={{ cursor: "pointer", color: "gray", display: "inline-flex", alignItems: "center" }}>
                   스택 선택하기 <IoChevronForward />
                 </span>
               </div>
-              
+
               <div className="stack-section">
                 {showStackSelection && (
                   <div className="stack-dropdown-container">
                     <div className="stack-dropdown-header">스택 선택하기</div>
                     <div className="stack-dropdown-description">사용 가능한 스택을 모두 골라 주세요!</div>
-                    <div className="stack-option-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                    <div className="stack-option-list" style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                       {stackOptions.map((stack) => (
-                        <div 
-                          key={stack} 
+                        <div
+                          key={stack}
                           onClick={() => handleStackSelect(stack)}
-                          className={`stack-option ${selectedStacks.includes(stack) ? 'selected' : ''}`}
+                          className={`stack-option ${selectedStacks.includes(stack) ? "selected" : ""}`}
                           style={{
-                            padding: '8px 20px',
-                            border: `1px solid ${selectedStacks.includes(stack) ? 'rgba(67, 154, 255, 1)' : '#ccc'}`,
-                            borderRadius: '20px',
-                            cursor: 'pointer',
-                            color: selectedStacks.includes(stack) ? 'rgba(67, 154, 255, 1)' : '#000',
-                            backgroundColor: selectedStacks.includes(stack) ? '#fff' : '#fff',
-                            display: 'inline-flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            textAlign: 'center',
+                            padding: "8px 20px",
+                            border: `1px solid ${selectedStacks.includes(stack) ? "rgba(67, 154, 255, 1)" : "#ccc"}`,
+                            borderRadius: "20px",
+                            cursor: "pointer",
+                            color: selectedStacks.includes(stack) ? "rgba(67, 154, 255, 1)" : "#000",
+                            backgroundColor: selectedStacks.includes(stack) ? "#fff" : "#fff",
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
                           }}
                         >
                           {stack}
@@ -250,21 +245,10 @@ function Register2() {
 
             <div className="Neinput-container">
               <p>Linkㅤㅤ</p>
-              <input
-                className="Neunderline-input"
-                type="text"
-                placeholder="github.com/"
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-              />
+              <input className="Neunderline-input" type="text" placeholder="github.com/" value={link} onChange={(e) => setLink(e.target.value)} />
             </div>
-            
-            <button 
-              className={`Nelogin-button ${isFormFilled ? 'active' : ''}`}
-              type="button"
-              onClick={handleSubmit}
-              disabled={!isFormFilled}
-            >
+
+            <button className={`Nelogin-button ${isFormFilled ? "active" : ""}`} type="button" onClick={handleSubmit} disabled={!isFormFilled}>
               입력완료
             </button>
           </div>

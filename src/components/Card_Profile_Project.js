@@ -31,10 +31,6 @@ function Card_Profile_Project() {
             </div>
           </div>
           <div className="Card-Project-looklike">
-            <div className="Card-Profile-Project-look">
-              <img src={Look} alt="조회수" />
-              <p>n,nnn</p>
-            </div>
             <div className="Card-Profile-Project-like">
               <img src={Like} alt="좋아요수" />
               <p>n,nnn</p>
