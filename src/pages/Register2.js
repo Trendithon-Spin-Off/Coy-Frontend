@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import "../styles/Register2.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoChevronDownOutline, IoChevronUpOutline, IoChevronForward } from "react-icons/io5";
 
 function Register2() {
   const location = useLocation();
+  const navigate = useNavigate();
   const memberId = location.state?.id;
   const [job, setJob] = useState("");
   const [selectedSubJob, setSelectedSubJob] = useState("");
@@ -35,11 +36,11 @@ function Register2() {
     try {
       const response = await axios.post(`${API_BASE_URL}/information/add`, payload);
       console.log(response.data);
+      navigate("/"); 
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
-
   const isFormFilled = introduce && job && selectedSubJob && selectedStacks.length > 0;
 
   const jobOptions = {
