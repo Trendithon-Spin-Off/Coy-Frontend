@@ -12,7 +12,7 @@ import whitefilllove from "../img/whitefilllove.png";
 function Card_Burn_Recruitment({ job }) {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const [viewCount, setViewCount] = useState(job.viewCount); // 상태 관리로 변경
+  const [viewCount, setViewCount] = useState(job.viewCount);
 
   if (!job || job.viewCount === undefined || job.likeCount === undefined) {
     return <div>Loading...</div>;
@@ -29,7 +29,7 @@ function Card_Burn_Recruitment({ job }) {
       axios.post(`${API_BASE_URL}/view/increase/${job.id}`)
         .then(response => {
           if (response.data === true) {
-            setViewCount(prevCount => prevCount + 1); // 상태 업데이트
+            setViewCount(prevCount => prevCount + 1);
             navigate(`/recruitment/${job.id}`);
           } else {
             console.error("조회수 증가 요청 실패");
@@ -81,7 +81,6 @@ function Card_Burn_Recruitment({ job }) {
           </div>
         </div>
         <div className="Card_Burn_Recruitment-action">
-          {/* 변경: 버튼에만 이벤트 핸들러를 적용 */}
           <button className="apply-text" onClick={handleToProjectLink}>채용 공고 보러가기</button>
         </div>
       </div>
