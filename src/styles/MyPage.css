@@ -12,6 +12,19 @@
 
   margin-top: 30px;
   cursor: pointer;
+  transition: 400ms ease-in-out;
+}
+
+.Profile-profile-modify-btn.active {
+  color: #439aff;
+  border: 1px solid #439aff;
+}
+
+.Profile-profile-modify-btn.active:hover {
+  background-color: #439aff;
+  border: 1px solid #439aff;
+  color: white;
+  transition: 400ms ease-in-out;
 }
 
 .Profile-mypage-img {

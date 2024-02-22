@@ -72,3 +72,8 @@
 .img-profile {
   height: 44px;
 }
+
+.header-line {
+  border-top: 0.5px solid #bdc7d5;
+  width: 145px;
+}
