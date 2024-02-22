@@ -12,6 +12,7 @@ const API_BASE_URL = 'https://likelion-running.store/api'
 function SearchRecruitment() {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
+  const [popularJobs, setPopularJobs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -46,13 +47,18 @@ function SearchRecruitment() {
       } catch (error) {
         console.error("Failed to fetch jobs:", error);
         setError('채용 정보를 불러오는 데 실패했습니다.');
-        if (error.response) {
-          console.error("Response data:", error.response.data);
-          console.error("Response status:", error.response.status);
-        }
-      } finally {
-        setLoading(false); 
       }
+
+      try {
+        const popularResponse = await axios.get(`${API_BASE_URL}/jobs/popular`);
+        console.log("Received popular jobs data:", popularResponse.data);
+        setPopularJobs(popularResponse.data);
+      } catch (error) {
+        console.error("Failed to fetch popular jobs:", error);
+        setError('인기 채용 정보를 불러오는 데 실패했습니다.');
+      }
+
+      setLoading(false);
     };
 
     fetchJobs();
@@ -74,9 +80,21 @@ function SearchRecruitment() {
             </div>
             <div className="Burning-card-list">
               <div className="Burning-list">
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
-                <Card_Burn_Recruitment />
+                {popularJobs.map((job) => (
+                  <Card_Burn_Recruitment
+                  key={job.id}
+                  id={job.id}
+                  logoUrl={job.logoUrl}
+                  companyName={job.companyName}
+                  viewCount={job.viewCount}
+                  applicantsCount={job.applicantsCount}
+                  jobTitle={job.jobTitle}
+                  type={job.type}
+                  deadLine={job.deadLine}
+                  level={job.level}
+                  likeCount={job.likeCount}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -88,27 +106,27 @@ function SearchRecruitment() {
                 <p>채용 공고 탐색하기👀</p>
               </div>
             </div>
-            
             <div className="Project-cards">
-            <div className="Project-cards-list">
-              {jobs.map((job) => (
-                <CardRecruitment
-                  id={job.id}
-                  logoUrl={job.logoUrl}
-                  companyName={job.companyName}
-                  viewCount={job.viewCount}
-                  applicantsCount={job.applicantsCount}
-                  jobTitle={job.jobTitle}
-                  type={job.type}
-                  deadLine={job.deadLine}
-                  level={job.level}
-                  likeCount={job.likeCount}
-                />
-              ))}
+              <div className="Project-cards-list">
+                {jobs.map((job) => (
+                  <CardRecruitment
+                    key={job.id}
+                    id={job.id}
+                    logoUrl={job.logoUrl}
+                    companyName={job.companyName}
+                    viewCount={job.viewCount}
+                    applicantsCount={job.applicantsCount}
+                    jobTitle={job.jobTitle}
+                    type={job.type}
+                    deadLine={job.deadLine}
+                    level={job.level}
+                    likeCount={job.likeCount}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
       <Footer />
     </div>
