@@ -33,10 +33,15 @@ function SearchRecruitment() {
     const fetchJobs = async () => {
       setLoading(true); 
       setError('');
-
+    
+      const now = formatDateTimeForServer(new Date());
+    
       try {
-        const response = await axios.get(`${API_BASE_URL}/jobs`);
-        console.log("Received response data:", response.data);
+        const response = await axios.get(`${API_BASE_URL}/jobs`, {
+          params: {
+            now: now,
+          }
+        });
         setJobs(response.data);
       } catch (error) {
         console.error("Failed to fetch jobs:", error);
@@ -93,21 +98,21 @@ function SearchRecruitment() {
             </div>
             <div className="Project-cards">
             <div className="Project-cards-list">
-  {jobs.map((job) => (
-    <CardRecruitment
-      key={job.id}
-      id={job.id}
-      logoUrl={job.logoUrl}
-      companyName={job.companyName}
-      viewCount={job.viewCount}
-      applicantsCount={job.applicantsCount}
-      jobTitle={job.jobTitle}
-      type={job.type}
-      deadLine={job.deadLine}
-      level={job.level}
-      likeCount={job.likeCount}
-    />
-  ))}
+            {jobs.map((job) => (
+  <CardRecruitment
+    key={job.id}
+    id={job.id}
+    logoUrl={job.logoUrl}
+    companyName={job.companyName}
+    viewCount={job.viewCount}
+    applicantsCount={job.applicantsCount}
+    jobTitle={job.jobTitle}
+    type={job.type}
+    deadLine={job.deadLine}
+    level={job.level}
+    likeCount={job.likeCount}
+  />
+))}
 </div>
             </div>
           </div>
