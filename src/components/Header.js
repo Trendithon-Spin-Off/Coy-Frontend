@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
 import Coy from "../img/Coy.png";
 import search from "../img/search.png";
+import bell from "../img/bell.png";
+import defalut from "../img/NonProfile.png";
+
+const API_BASE_URL = "https://likelion-running.store/api";
 
 function Header() {
   const [searchData, setSearchData] = useState("");
@@ -46,6 +50,23 @@ function Header() {
     }
   };
 
+  // 로그인 상태 관리
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // 로컬 스토리지에서 토큰 불러오기
+    const storedToken = localStorage.getItem("token");
+
+    // 토큰이 존재하면 로그인 상태를 true로 설정
+    if (storedToken) {
+      setLoggedIn(true);
+      console.log("true");
+    } else {
+      setLoggedIn(false);
+      console.log("false");
+    }
+  }, []);
+
   return (
     <div className="Header">
       <div className="header-left">
@@ -62,15 +83,22 @@ function Header() {
           <img src={search} alt="검색 이미지" onClick={handleSearch} style={{ cursor: "pointer" }} />
           <input className="search-text" type="text" value={searchData} onChange={handleInputChange} onKeyPress={handleOnKeyPress} placeholder="새로운 인사이트를 검색해보세요" />
         </div>
-        <div className="user-bar">
-          <p onClick={handleLoginLink} style={{ cursor: "pointer" }}>
-            로그인
-          </p>
-          <p>/</p>
-          <p onClick={handleRegisterLink} style={{ cursor: "pointer" }}>
-            회원가입
-          </p>
-        </div>
+        {isLoggedIn ? (
+          <div className="login-user">
+            <img className="img-bell" src={bell} alt="알람창" />
+            <img className="img-profile" src={defalut} alt="내 프로필" />
+          </div>
+        ) : (
+          <div className="user-bar">
+            <p onClick={handleLoginLink} style={{ cursor: "pointer" }}>
+              로그인
+            </p>
+            <p>/</p>
+            <p onClick={handleRegisterLink} style={{ cursor: "pointer" }}>
+              회원가입
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

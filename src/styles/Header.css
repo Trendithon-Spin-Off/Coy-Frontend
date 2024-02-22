@@ -58,3 +58,17 @@
 .user-bar {
   display: flex;
 }
+
+.login-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.img-bell {
+  height: 35px;
+}
+
+.img-profile {
+  height: 44px;
+}

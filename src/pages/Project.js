@@ -19,6 +19,8 @@ import "swiper/css/navigation";
 
 SwiperCore.use([Navigation, Scrollbar, Pagination]);
 
+const API_BASE_URL = "https://likelion-running.store/api";
+
 function Project() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
@@ -26,7 +28,7 @@ function Project() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/project/search/all")
+      .get(`${API_BASE_URL}/project/search/all`)
       .then((response) => {
         setProjects(response.data);
       })
@@ -36,7 +38,7 @@ function Project() {
 
     // 인기 프로젝트 목록 가져오기
     axios
-      .get("http://localhost:8080/api/project/popular/list")
+      .get(`${API_BASE_URL}/project/popular/list`)
       .then((response) => {
         setPopularProjects(response.data);
       })

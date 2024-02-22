@@ -7,6 +7,8 @@ import Card_Project from "../components/Card_Project";
 
 import "../styles/SearchProject.css";
 
+const API_BASE_URL = "https://likelion-running.store/api";
+
 function SearchProject() {
   const { searchData } = useParams();
   const [searchResults, setSearchResults] = useState([]);
@@ -14,7 +16,7 @@ function SearchProject() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/project/search/list?&searchKeyword=${searchData}`);
+        const response = await axios.get(`${API_BASE_URL}/api/project/search/list?&searchKeyword=${searchData}`);
         setSearchResults(response.data.content);
       } catch (error) {
         console.error("Error fetching search results:", error);
