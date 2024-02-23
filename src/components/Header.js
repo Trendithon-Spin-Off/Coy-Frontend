@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/Header.css";
 import styled from "styled-components";
 
@@ -74,6 +75,33 @@ function Header() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const bellDropdownRef = useRef(null);
+
+  const [imageUrl, setProfileImage] = useState("");
+  const [memberId, setMemberId] = useState("");
+
+  useEffect(() => {
+    // useEffect를 사용하여 컴포넌트가 마운트될 때 API 호출
+    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰 가져오기
+    const storedMemberId = localStorage.getItem("memberId"); // 로컬 스토리지에서 memberId 가져오기
+    setMemberId(storedMemberId);
+
+    // API 호출 및 데이터 수신
+    axios
+      .get(`${API_BASE_URL}/information/check/my`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 헤더에 토큰 추가
+        },
+      })
+      .then((response) => {
+        // API 응답 데이터를 받아와서 상태 변수에 설정
+        const userData = response.data;
+        setProfileImage(userData.imageUrl);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        // 오류 처리
+      });
+  }, []);
 
   const handleNavLinkClick = (path) => {
     navigate(path);
@@ -243,7 +271,7 @@ function Header() {
               )}
             </div>
             <div className="img-profile" onClick={handleMenuClick} style={{ position: "relative" }} ref={dropdownRef}>
-              <img src={defalut} alt="내 프로필" style={{ cursor: "pointer" }} />
+              <img src={imageUrl || defalut} alt="내 프로필" style={{ cursor: "pointer" }} />
               {isDropdownVisible && (
                 <DropdownContainer isVisible={isDropdownVisible}>
                   <DropdownItem onClick={() => handleNavLinkClick("/mypage")}>내 프로필</DropdownItem>

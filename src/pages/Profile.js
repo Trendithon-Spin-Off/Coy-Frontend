@@ -19,15 +19,11 @@ function Profile() {
   const [technics, setTechnics] = useState([]);
   const [introduce, setIntroduce] = useState("");
   const [link, setLink] = useState("");
+  const [chatlink, setChatLink] = useState("");
   const [projects, setProjects] = useState([]);
-  // const [memberId, setMemberId] = useState("");
   const [imageUrl, setProfileImage] = useState("");
 
   const navigate = useNavigate();
-
-  const handleChat = () => {
-    navigate("/chat");
-  };
 
   useEffect(() => {
     axios
@@ -40,6 +36,7 @@ function Profile() {
         setSpecificDuty(userData.specificDuty);
         setTechnics(userData.technics);
         setLink(userData.link);
+        setChatLink(userData.openChatting);
         setProfileImage(userData.imageUrl);
         setProjects(userData.boards);
       })
@@ -110,7 +107,7 @@ function Profile() {
               </div>
               <div className="Profile-profile-link">
                 <p div className="Profile-profile-title">
-                  Link
+                  Github
                 </p>
                 <Link to={link}>
                   <p div className="Profile-profile-text">
@@ -119,9 +116,13 @@ function Profile() {
                 </Link>
               </div>
               <div className="Profile-profile-space">
-                <div className="Profile-profile-chat-btn">
-                  <p>1:1 채팅</p>
-                </div>
+                {chatlink && (
+                  <Link to={chatlink}>
+                    <div className="Profile-profile-chat-btn">
+                      <p>1:1 채팅</p>
+                    </div>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
