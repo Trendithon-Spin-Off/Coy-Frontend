@@ -15,6 +15,7 @@ function Register2() {
   const [isSubJobDropdownOpen, setIsSubJobDropdownOpen] = useState(false);
   const [showStackSelection, setShowStackSelection] = useState(false);
   const [selectedStacks, setSelectedStacks] = useState([]);
+  const [openChatting, setOpenChatting] = useState(""); 
   const [introduce, setIntroduce] = useState("");
   const [link, setLink] = useState("");
 
@@ -28,6 +29,7 @@ function Register2() {
       job: job,
       specificDuty: selectedSubJob,
       link: link,
+      openChatting: openChatting,
       technics: selectedStacks,
     };
 
@@ -154,8 +156,8 @@ function Register2() {
             <p>추가 정보를 입력하면 더 많은 기회를 얻을 수 있어요.</p>
 
             <div className="Neinput-container">
-              <p>한줄 소개</p>
-              <input className="Neunderline-input" type="text" placeholder="한줄 소개를 입력해주세요" value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
+              <p>ㅤ한줄소개</p>
+              <input className="Neunderline-input" type="text" placeholder="한줄소개를 입력해주세요" value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
             </div>
 
             <div className="Neinput-container">
@@ -245,10 +247,13 @@ function Register2() {
             </div>
 
             <div className="Neinput-container">
-              <p>Linkㅤㅤ</p>
+              <p>깃허브</p>
               <input className="Neunderline-input" type="text" placeholder="github.com/" value={link} onChange={(e) => setLink(e.target.value)} />
             </div>
-
+            <div className="Neinput-container">
+              <p>ㅤ오픈채팅 </p>
+              <input className="Neunderline-input" type="text" placeholder="오픈채팅방 링크를 입력해주세요" value={openChatting} onChange={(e) => setOpenChatting(e.target.value)} />
+            </div>
             <button className={`Nelogin-button ${isFormFilled ? "active" : ""}`} type="button" onClick={handleSubmit} disabled={!isFormFilled}>
               입력완료
             </button>
