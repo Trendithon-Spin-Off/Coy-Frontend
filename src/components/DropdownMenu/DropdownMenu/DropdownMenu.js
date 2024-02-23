@@ -6,7 +6,7 @@ import "./DropdownMenu.css";
 function DropdownMenu() {
   const categories = [
     { id: 1, name: "소셜 네트워크" },
-    { id: 2, name: "게임/엔터테이먼트" },
+    { id: 2, name: "게임/엔터테인먼트" },
     { id: 3, name: "뉴스/정보" },
     { id: 4, name: "금융" },
     { id: 5, name: "기타" },
@@ -56,32 +56,19 @@ function DropdownMenu() {
     return (
       <label className={`menu-item ${isSelected ? "selected" : ""}`}>
         {category.name}
-        <input
-          type="checkbox"
-          checked={isSelected}
-          onChange={() => handleCategoryClick(category.name)}
-        />
+        <input type="checkbox" checked={isSelected} onChange={() => handleCategoryClick(category.name)} />
       </label>
     );
   }
 
   return (
-    <div
-      className={`dropdown ${isItemSelected ? "open" : ""}`}
-      ref={dropdownRef}
-    >
+    <div className={`dropdown ${isItemSelected ? "open" : ""}`} ref={dropdownRef}>
       {/* 아이템이 선택되었을 때 버튼 색상 변경 */}
       <button className="dropdown-button" onClick={() => setIsOpen(!isOpen)}>
         카테고리
         <SlArrowDown className="arrow-button" />
       </button>
-      <CSSTransition
-        in={isOpen}
-        unmountOnExit
-        timeout={10}
-        onEnter={calcHeight}
-        classNames="menu-primary"
-      >
+      <CSSTransition in={isOpen} unmountOnExit timeout={10} onEnter={calcHeight} classNames="menu-primary">
         <div className="menu" style={{ height: isOpen ? menuHeight : 0 }}>
           {categories.map((category) => (
             <DropdownItem key={category.id} category={category} />

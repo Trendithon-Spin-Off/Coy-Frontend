@@ -10,7 +10,7 @@ function DropdownPost({ setCategory }) {
   // setCategory 함수를 props로 전달받음
   const categories = [
     { id: 1, name: "소셜 네트워크" },
-    { id: 2, name: "게임/엔터테이먼트" },
+    { id: 2, name: "게임/엔터테인먼트" },
     { id: 3, name: "뉴스/정보" },
     { id: 4, name: "금융" },
     { id: 5, name: "기타" },
@@ -59,35 +59,17 @@ function DropdownPost({ setCategory }) {
     return (
       <label className={`menu-item ${isSelected ? "selected" : ""}`}>
         {category.name}
-        <input
-          type="checkbox"
-          checked={isSelected}
-          onChange={() => handleCategoryClick(category.name)}
-        />
+        <input type="checkbox" checked={isSelected} onChange={() => handleCategoryClick(category.name)} />
       </label>
     );
   }
 
   return (
-    <div
-      className={`dropdown ${isItemSelected ? "open" : ""}`}
-      ref={dropdownRef}
-    >
-      <button
-        className="dropdown-button"
-        onClick={() => setIsOpen(!isOpen)}
-        onChange={handleCategoryChange}
-      >
-        {selectedCategory || "카테고리"}{" "}
-        <SlArrowDown className={`arrow-button ${isOpen ? "rotate" : ""}`} />
+    <div className={`dropdown ${isItemSelected ? "open" : ""}`} ref={dropdownRef}>
+      <button className="dropdown-button" onClick={() => setIsOpen(!isOpen)} onChange={handleCategoryChange}>
+        {selectedCategory || "카테고리"} <SlArrowDown className={`arrow-button ${isOpen ? "rotate" : ""}`} />
       </button>
-      <CSSTransition
-        in={isOpen}
-        unmountOnExit
-        timeout={10}
-        onEnter={calcHeight}
-        classNames="menu-primary"
-      >
+      <CSSTransition in={isOpen} unmountOnExit timeout={10} onEnter={calcHeight} classNames="menu-primary">
         <div className="menu" style={{ height: isOpen ? menuHeight : 0 }}>
           {categories.map((category) => (
             <DropdownItem key={category.id} category={category} />
