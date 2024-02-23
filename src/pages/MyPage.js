@@ -5,10 +5,40 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Profile_Project from "../components/Card_Profile_Project";
 import { IoChevronDownOutline, IoChevronUpOutline, IoChevronForward } from "react-icons/io5";
+import AWS from "aws-sdk";
 
 import "../styles/MyPage.css";
 import Upload from "../img/upload.png";
 import Default from "../img/NonProfile.png";
+
+const accessKeyId = process.env.REACT_APP_AWS_PROFILE_ACCESS_KEY_ID;
+const secretAccessKey = process.env.REACT_APP_AWS_PROFILE_SECRET_ACCESS_KEY;
+const region = process.env.REACT_APP_AWS_PROFILE_REGION;
+const bucketName = process.env.REACT_APP_AWS_PROFILE_BUCKET_NAME;
+
+const uploadToS3 = async (file) => {
+  const s3 = new AWS.S3({
+    accessKeyId: "AKIAZBAE57CCNJHI72ZY",
+    secretAccessKey: "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",
+    region: "ap-northeast-2",
+  });
+
+  const params = {
+    Bucket: "trendithon.profile",
+    Key: file.name,
+    Body: file,
+    ACL: "public-read",
+    ContentType: "image/jpeg",
+  };
+
+  try {
+    const data = await s3.upload(params).promise();
+    return data.Location;
+  } catch (error) {
+    console.log("Error uploading to S3:", error);
+    throw error;
+  }
+};
 
 function MyPage() {
   const navigate = useNavigate();
@@ -24,6 +54,8 @@ function MyPage() {
   const [link, setLink] = useState("");
   const [projects, setProjects] = useState([]);
   const [memberId, setMemberId] = useState("");
+  const [imageUrl, setProfileImage] = useState("");
+  const [selectedFileName, setSelectedFileName] = useState("");
 
   const API_BASE_URL = "https://likelion-running.store/api";
 
@@ -49,6 +81,7 @@ function MyPage() {
         setSelectedSubJob(userData.specificDuty);
         setSelectedStacks(userData.technics);
         setLink(userData.link);
+        setProfileImage(userData.imageUrl);
         setProjects(userData.boards);
       })
       .catch((error) => {
@@ -68,16 +101,30 @@ function MyPage() {
     }
   };
 
+  const handleProfileImageChange = async (e) => {
+    const imageFile = e.target.files[0];
+
+    setImageFn(e);
+
+    try {
+      const imageUrl = await uploadToS3(imageFile);
+      setProfileImage(imageUrl);
+      setSelectedFileName(imageFile ? imageFile.name : "");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     const payload = {
       memberId,
-      name,
       introduce,
       job,
       specificDuty: selectedSubJob,
       link,
       technics: selectedStacks,
+      imageUrl,
     };
     try {
       await axios.post(`${API_BASE_URL}/information/edit`, payload, {
@@ -93,7 +140,7 @@ function MyPage() {
     }
   };
 
-  const isFormFilled = introduce && job && selectedSubJob && selectedStacks.length > 0;
+  const isFormFilled = imageUrl && introduce && job && selectedSubJob && selectedStacks.length > 0;
 
   const jobOptions = {
     프론트엔드: ["IOS", "안드로이드", "웹프론트엔드", "웹퍼블리셔"],
@@ -191,7 +238,7 @@ function MyPage() {
   const stackOptions = ["JavaScript", "TypeScript", "React", "Vue", "Nodejs", "Spring", "Java", "Nextjs", "Nestjs", "Express", "Go", "C", "Python", "Django", "Swift", "Kotlin", "MySQL", "MongoDB", "php", "GraphQL", "Firebase", "ReactNative", "Unity", "Flutter", "AWS", "Kubernetes", "Docker", "Git", "Figma", "Zeplin"];
 
   // const projectProfileCards = Array.from({ length: 10 }, (_, index) => <Card_Profile_Project key={index} />);
-  const projectProfileCards = projects.map((project) => <Card_Profile_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectProfileCards = projects.map((project) => <Card_Profile_Project key={project.bno} projectName={project.projectName} description={project.projectDescription} category={project.category} boardLike={project.boardLike} imageUrl={project.projectImage} onClick={() => handleToProjectLink(project.bno)} />);
 
   const handleToProjectLink = (bno) => {
     navigate(`/project/read/${bno}`);
@@ -209,10 +256,10 @@ function MyPage() {
                   <label htmlFor="file" className="upload-label">
                     <img src={Upload} alt="이미지 업로드" /> 이미지 업로드
                   </label>
-                  <input type="file" name="file" id="file" accept="image" onChange={setImageFn} />
+                  <input type="file" name="file" id="file" accept="image/*" onChange={handleProfileImageChange} />
                   <div id="file-preview">{imagePreview && <img src={imagePreview} alt="Preview" />}</div>
                   <div className="Profile-mypage-preview-img" style={{ display: imagePreview ? "none" : "block" }}>
-                    <img src={Default} alt="프로젝트 이미지" />
+                    <img src={imageUrl || Default} alt="프로젝트 이미지" />
                   </div>
                 </div>
               </div>

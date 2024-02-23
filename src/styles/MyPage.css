@@ -102,3 +102,13 @@
   position: relative;
   z-index: 1;
 }
+
+.Profile-mypage-preview-img img {
+  height: 140px;
+  width: 140px;
+  border-radius: 140px;
+  object-fit: cover;
+
+  position: relative;
+  z-index: 1;
+}

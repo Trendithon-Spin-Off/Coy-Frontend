@@ -121,6 +121,7 @@
 
 .Card-Burn-img img {
   filter: brightness(40%);
+  object-fit: cover;
   transition: 400ms ease-in-out;
 }
 
