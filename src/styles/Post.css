@@ -2,6 +2,10 @@
   margin-bottom: 200px;
   background-color: #f9f9f9;
 }
+.project-input-container {
+  margin: 0;
+  width: 100%;
+}
 /* 카테고리 버튼*/
 .dropdown-post {
   margin-top: 50px;
@@ -164,8 +168,8 @@
 }
 
 /*추가된 파트 & 멤버 */
-.member {
-  margin-top: 20px;
+.member-select {
+  margin-bottom: 20px;
 }
 .member-id {
   background-color: #e5f4ff;
@@ -173,6 +177,7 @@
   border: 1px solid #439aff;
   display: inline;
   border-radius: 3px;
+  margin-right: 20px;
 }
 
 .close-button {
@@ -190,6 +195,7 @@
   display: flex;
   justify-content: center;
   margin-top: 150px;
+  margin-bottom: 10px;
 }
 .submit-container button {
   padding: 20px 70px;
@@ -201,4 +207,8 @@
 }
 .submit-container button:hover {
   background-color: #525e71;
+}
+
+.dropdown-post {
+  margin-top: 50px;
 }

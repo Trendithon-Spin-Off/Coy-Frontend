@@ -65,11 +65,27 @@ function Project() {
 
   // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
   // const BurnprojectCards = Array.from({ length: 7 }, (_, index) => <Card_Burn_Project key={index} />);
-  const projectCards = projects.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectCards = projects.map((project) => (
+    <Card_Project
+      key={project.bno}
+      projectName={project.projectName}
+      description={project.description}
+      category={project.category}
+      boardLike={project.boardLike}
+      onClick={() => handleToProjectLink(project.bno)}
+    />
+  ));
 
   const BurnprojectCards = popularProjects.map((project) => (
     <SwiperSlide key={project.bno}>
-      <Card_Burn_Project projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />
+      <Card_Burn_Project
+        projectName={project.projectName}
+        description={project.description}
+        category={project.category}
+        boardLike={project.boardLike}
+        imageUrl={project.imageUrl}
+        onClick={() => handleToProjectLink(project.bno)}
+      />
     </SwiperSlide>
   ));
 
@@ -85,7 +101,9 @@ function Project() {
           <div className="Burning-content">
             <div className="Burning-text">
               <p className="Burning-title">실시간 인기 프로젝트🔥</p>
-              <p className="Burning-sub">지금 뜨고 있는 프로젝트를 구경해 보세요!</p>
+              <p className="Burning-sub">
+                지금 뜨고 있는 프로젝트를 구경해 보세요!
+              </p>
             </div>
             <div className="Burning-card-list">
               <div className="Burning-list">
@@ -96,7 +114,11 @@ function Project() {
                   scrollbar={{ draggable: true }}
                   navigation
                   pagination={{ clickable: true }}
-                  breakpoints={{ 1730: { slidesPerView: 4 }, 1450: { slidePreView: 3 }, 1160: { slidePreView: 2 } }}
+                  breakpoints={{
+                    1730: { slidesPerView: 4 },
+                    1450: { slidePreView: 3 },
+                    1160: { slidePreView: 2 },
+                  }}
                   style={{
                     "--swiper-pagination-color": "#439AFF",
                     "--swiper-navigation-color": "rgb(0,0,0,0)",
@@ -114,7 +136,11 @@ function Project() {
               <div className="Project-title">
                 <p>프로젝트 탐색하기👀</p>
               </div>
-              <div className="Project-btn" onClick={handleToPostLink} style={{ cursor: "pointer" }}>
+              <div
+                className="Project-btn"
+                onClick={handleToPostLink}
+                style={{ cursor: "pointer" }}
+              >
                 <img src={Add} alt="프로젝트 등록 버튼" />
                 <p> 프로젝트 등록하기</p>
               </div>

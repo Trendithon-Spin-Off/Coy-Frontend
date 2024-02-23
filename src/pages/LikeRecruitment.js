@@ -11,20 +11,35 @@ const API_BASE_URL = 'https://likelion-running.store/api';
 
 function LikeRecruitment() {
   const navigate = useNavigate();
-  const [likedJobs, setLikedJobs] = useState([]); 
+  const [likedJobs, setLikedJobs] = useState([]);
 
   useEffect(() => {
     const fetchLikedJobs = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/jobs/like`);
-        setLikedJobs(response.data); 
+        const memberId = localStorage.getItem('memberId');
+        const token = localStorage.getItem('token'); 
+
+        if (!memberId || memberId === "anonymousUser" || !token) {
+          console.error("Invalid memberId or token found");
+          navigate("/login");
+          return;
+        }
+  
+        const response = await axios.get(`${API_BASE_URL}/jobs/like`, {
+          headers: {
+            'Member-ID': memberId,
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setLikedJobs(response.data);
       } catch (error) {
         console.error("Failed to fetch liked jobs:", error);
       }
     };
-
+  
     fetchLikedJobs();
-  }, []);
+  }, [navigate]);
+  
   const handleProjectLike = () => {
     navigate("/like/project");
   };
@@ -33,6 +48,7 @@ function LikeRecruitment() {
     navigate("/like/recruitment");
   };
 
+
   const recruitCards = Array.from({ length: 10 }, (_, index) => <Card_Recruitment key={index} />);
 
   return (
@@ -40,7 +56,7 @@ function LikeRecruitment() {
       <Header />
       <div className="content">
         <div className="Like-content">
-          <p div className="Like-Title">
+          <p className="Like-Title"> 
             내 좋아요
           </p>
           <div className="Like-bar">
@@ -55,25 +71,17 @@ function LikeRecruitment() {
             <div className="Like-list-cards">
               {likedJobs.map((job) => (
                 <Card_Recruitment
-                  key={job.id}
-                  logoUrl={job.logoUrl}
-                  companyName={job.companyName}
-                  viewCount={job.viewCount}
-                  applicantsCount={job.applicantsCount}
-                  jobTitle={job.jobTitle}
-                  type={job.type}
-                  deadLine={job.deadLine}
-                  level={job.level}
-                  likeCount={job.likeCount}
-                />
-              ))}
+                key={job.id}
+                job={job}
+                  />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-      </div>
-      <Footer />
-    </div>
-  );
-}
+      );
+    }
 
 export default LikeRecruitment;

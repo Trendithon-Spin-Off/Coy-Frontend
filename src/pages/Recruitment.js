@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import { Swiper, SwiperSlide } from "swiper/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from 'axios';
+import SwiperCore from "swiper";
 import CardRecruitment from "../components/Card_Recruitment";
 import Card_Burn_Recruitment from "../components/Card_Burn_Recruitment";
 import "../styles/Recruitment.css";
@@ -62,6 +64,23 @@ function SearchRecruitment() {
 
     fetchJobs();
   }, []);
+
+  const handleLogout = () => {
+    const memberId = localStorage.getItem('memberId');
+  
+    if (memberId) {
+      localStorage.removeItem(`likedJobs_${memberId}`);
+    }
+  
+    localStorage.removeItem('memberId');
+    localStorage.removeItem('token');
+  
+   
+    navigate('/'); 
+
+    window.location.reload();
+  };
+  
   
   return (
     <div className="page">
@@ -82,7 +101,7 @@ function SearchRecruitment() {
                 {popularJobs.map((job) => (
                   <Card_Burn_Recruitment
                   key={job.id}
-      job={job}
+                  job={job}
                   />
                 ))}
               </div>
@@ -100,17 +119,8 @@ function SearchRecruitment() {
             <div className="Project-cards-list">
             {jobs.map((job) => (
   <CardRecruitment
-    key={job.id}
-    id={job.id}
-    logoUrl={job.logoUrl}
-    companyName={job.companyName}
-    viewCount={job.viewCount}
-    applicantsCount={job.applicantsCount}
-    jobTitle={job.jobTitle}
-    type={job.type}
-    deadLine={job.deadLine}
-    level={job.level}
-    likeCount={job.likeCount}
+   key={job.id}
+      job={job}
   />
 ))}
 </div>

@@ -59,12 +59,12 @@
 .Nelogin-box {
   background-color: #ffffff;
   padding: 60px;
-  width: 500px;
-  height: 700px;
+  width: 200px;
+  height: 800px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 100px;
+  margin-top: 400px;
   margin-right: 240px;
 }
 
