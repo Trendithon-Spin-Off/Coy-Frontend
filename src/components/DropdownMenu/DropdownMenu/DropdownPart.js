@@ -4,7 +4,7 @@ import { SlArrowDown } from "react-icons/sl";
 
 import "./DropdownMenu.css";
 
-function DropdownPost({ selectedParts = [], onPartSelect }) {
+function DropdownPart({ selectedParts = [], onPartSelect }) {
   const parts = [
     { id: 1, name: "기획" },
     { id: 2, name: "디자인" },
@@ -37,21 +37,19 @@ function DropdownPost({ selectedParts = [], onPartSelect }) {
     };
   }, []);
 
-  function handlePartClick(partName) {
-    if (selectedPart === partName) {
-      setSelectedPart("");
-      setIsPartSelected(false);
-      onPartSelect("");
-    } else {
-      setSelectedPart(partName);
-      setIsPartSelected(true);
-      onPartSelect(partName);
-    }
+  const handlePartSelect = (part) => {
+    setSelectedPart((prevParts) => {
+      if (prevParts.includes(part)) {
+        return prevParts.filter((p) => p !== part);
+      } else {
+        return [...prevParts, part];
+      }
+    });
     setIsOpen(false);
-  }
+  };
 
   function DropdownItem({ part }) {
-    const isSelected = selectedPart === part.name;
+    const isSelected = selectedParts.includes(part.name);
 
     return (
       <label className={`menu-item ${isSelected ? "selected" : ""}`}>
@@ -59,7 +57,7 @@ function DropdownPost({ selectedParts = [], onPartSelect }) {
         <input
           type="checkbox"
           checked={isSelected}
-          onChange={() => handlePartClick(part.name)}
+          onChange={() => handlePartSelect(part.name)}
         />
       </label>
     );
@@ -67,11 +65,11 @@ function DropdownPost({ selectedParts = [], onPartSelect }) {
 
   return (
     <div
-      className={`dropdown ${isPartSelected ? "open" : ""}`}
+      className={`dropdown ${selectedParts.length > 0 ? "open" : ""}`}
       ref={dropdownRef}
     >
       <button className="dropdown-button" onClick={() => setIsOpen(!isOpen)}>
-        {selectedPart || "파트"}{" "}
+        {selectedParts.length > 0 ? selectedParts.join(", ") : "파트"}{" "}
         <SlArrowDown className={`arrow-button ${isOpen ? "rotate" : ""}`} />
       </button>
       <CSSTransition
@@ -83,7 +81,19 @@ function DropdownPost({ selectedParts = [], onPartSelect }) {
       >
         <div className="menu" style={{ height: isOpen ? menuHeight : 0 }}>
           {parts.map((part) => (
-            <DropdownItem key={part.id} part={part} />
+            <label
+              key={part.id}
+              className={`menu-item ${
+                selectedParts.includes(part.name) ? "selected" : ""
+              }`}
+            >
+              {part.name}
+              <input
+                type="checkbox"
+                checked={selectedParts.includes(part.name)}
+                onChange={() => onPartSelect(part.name)}
+              />
+            </label>
           ))}
         </div>
       </CSSTransition>{" "}
@@ -91,4 +101,4 @@ function DropdownPost({ selectedParts = [], onPartSelect }) {
   );
 }
 
-export default DropdownPost;
+export default DropdownPart;

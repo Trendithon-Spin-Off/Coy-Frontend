@@ -3,7 +3,11 @@ import { CSSTransition } from "react-transition-group";
 import { SlArrowDown } from "react-icons/sl";
 import "./DropdownMenu.css";
 
-function DropdownPost() {
+function DropdownPost({ setCategory }) {
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+  // setCategory 함수를 props로 전달받음
   const categories = [
     { id: 1, name: "소셜 네트워크" },
     { id: 2, name: "게임/엔터테이먼트" },
@@ -12,10 +16,10 @@ function DropdownPost() {
     { id: 5, name: "기타" },
   ];
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(""); // 선택된 카테고리를 담는 상태로 변경
+  const [selectedCategory, setSelectedCategory] = useState(""); // 선택된 카테고리 상태 추가
   const [menuHeight, setMenuHeight] = useState(null);
-  const [isItemSelected, setIsItemSelected] = useState(false); // 아이템이 선택되었는지 여부를 저장하는 상태
-  const dropdownRef = useRef(null); // 드롭다운 메뉴 참조를 위한 useRef 추가
+  const [isItemSelected, setIsItemSelected] = useState(false);
+  const dropdownRef = useRef(null);
 
   const calcHeight = (el) => {
     const height = el.offsetHeight;
@@ -23,7 +27,6 @@ function DropdownPost() {
   };
 
   useEffect(() => {
-    // 아무 곳이나 클릭 시 메뉴 닫기 처리
     const handleOutsideClick = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
@@ -39,17 +42,19 @@ function DropdownPost() {
 
   function handleCategoryClick(categoryName) {
     if (selectedCategory === categoryName) {
-      setSelectedCategory(""); // 같은 아이템을 클릭하면 선택 해제
-      setIsItemSelected(false); // 선택이 해제되었으므로 상태 변경
+      setSelectedCategory("");
+      setIsItemSelected(false);
+      setCategory(""); // 카테고리 선택 해제 시, 상위 컴포넌트의 카테고리 값을 빈 문자열로 업데이트
     } else {
       setSelectedCategory(categoryName);
-      setIsItemSelected(true); // 아이템이 선택되었음을 표시
+      setIsItemSelected(true);
+      setCategory(categoryName); // 카테고리 선택 시, 상위 컴포넌트의 카테고리 값을 선택된 카테고리로 업데이트
     }
-    setIsOpen(false); // 카테고리를 선택했으므로 메뉴 닫기
+    setIsOpen(false);
   }
 
   function DropdownItem({ category }) {
-    const isSelected = selectedCategory === category.name; // 선택된 카테고리와 현재 아이템의 카테고리를 비교하여 isSelected 설정
+    const isSelected = selectedCategory === category.name;
 
     return (
       <label className={`menu-item ${isSelected ? "selected" : ""}`}>
@@ -68,10 +73,12 @@ function DropdownPost() {
       className={`dropdown ${isItemSelected ? "open" : ""}`}
       ref={dropdownRef}
     >
-      {/* 아이템이 선택되었을 때 버튼 색상 변경 */}
-      <button className="dropdown-button" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className="dropdown-button"
+        onClick={() => setIsOpen(!isOpen)}
+        onChange={handleCategoryChange}
+      >
         {selectedCategory || "카테고리"}{" "}
-        {/* 선택된 카테고리가 없을 경우 기본값으로 "카테고리"를 표시합니다. */}
         <SlArrowDown className={`arrow-button ${isOpen ? "rotate" : ""}`} />
       </button>
       <CSSTransition
