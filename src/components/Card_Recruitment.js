@@ -24,6 +24,10 @@ function CardRecruitment({ job }) {
 
   const API_BASE_URL = 'https://likelion-running.store/api';
 
+  const handleToProjectLink = () => {
+    navigate(`/job/${job.id}`);
+  };
+
   const increaseViewCountAndNavigate = () => {
     if (job.id) {
       axios.post(`${API_BASE_URL}/view/increase/${job.id}`)
@@ -125,7 +129,7 @@ function CardRecruitment({ job }) {
             </div>
             <div className="Card_Recruitment-action">
               <img src={liked ? FillLove : Love} alt="좋아요" className="like-icon" onClick={toggleLike} />
-              <button className="apply">채용 공고 보러가기</button>
+              <button className="apply" onClick={handleToProjectLink}>채용 공고 보러가기</button>
             </div>
           </div>
         </div>
