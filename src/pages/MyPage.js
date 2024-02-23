@@ -52,7 +52,7 @@ function MyPage() {
   const [selectedStacks, setSelectedStacks] = useState([]);
   const [introduce, setIntroduce] = useState("");
   const [link, setLink] = useState("");
-  const [chatlink, setChatLink] = useState("");
+  const [openChatting, setChatLink] = useState("");
   const [projects, setProjects] = useState([]);
   const [memberId, setMemberId] = useState("");
   const [imageUrl, setProfileImage] = useState("");
@@ -125,7 +125,7 @@ function MyPage() {
       job,
       specificDuty: selectedSubJob,
       link,
-      chatlink,
+      openChatting: openChatting,
       technics: selectedStacks,
       imageUrl,
     };
@@ -143,7 +143,7 @@ function MyPage() {
     }
   };
 
-  const isFormFilled = link && chatlink && imageUrl && introduce && job && selectedSubJob && selectedStacks.length > 0;
+  const isFormFilled = link && openChatting && imageUrl && introduce && job && selectedSubJob && selectedStacks.length > 0;
 
   const jobOptions = {
     프론트엔드: ["IOS", "안드로이드", "웹프론트엔드", "웹퍼블리셔"],
@@ -375,7 +375,7 @@ function MyPage() {
 
                 <div className="Neinput-container" style={{ marginTop: "10px" }}>
                   <p style={{ marginBottom: "0px", marginRight: "0" }}>오픈채팅</p>
-                  <input className="Neunderline-input" style={{ width: "245px" }} type="text" placeholder="오픈채팅방 링크를 입력해주세요." value={chatlink} onChange={(e) => setChatLink(e.target.value)} />
+                  <input className="Neunderline-input" style={{ width: "245px" }} type="text" placeholder="오픈채팅방 링크를 입력해주세요." value={openChatting} onChange={(e) => setChatLink(e.target.value)} />
                 </div>
               </div>
 

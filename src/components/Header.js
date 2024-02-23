@@ -240,31 +240,27 @@ function Header() {
                   <div className="bell-list">
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>pookey1104 님이 프로젝트 'Proust'를 좋아합니다.</p>
                     </div>
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>may020503 님이 프로젝트 'Proust'를 좋아합니다.</p>
                     </div>
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>may020503 님이 프로젝트 'ToTree'를 좋아합니다.</p>
                     </div>
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>test 님이 프로젝트 '안도'를 좋아합니다.</p>
                     </div>
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>test 님이 프로젝트 '티밍'를 좋아합니다.</p>
                     </div>
                     <div className="bell-content">
                       <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
-                    </div>
-                    <div className="bell-content">
-                      <img src={defalut} alt="프로필 사진" />
-                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                      <p>test 님이 프로젝트 'Proust'를 좋아합니다.</p>
                     </div>
                   </div>
                 </DropdownBellContainer>

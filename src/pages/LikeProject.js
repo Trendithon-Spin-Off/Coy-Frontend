@@ -1,12 +1,34 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Project from "../components/Card_Project";
 
 import "../styles/LikeProject.css";
 
+const API_BASE_URL = "https://likelion-running.store/api";
+
 function LikeProject() {
   const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰 가져오기
+
+    axios
+      .get(`${API_BASE_URL}/check/like/my`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 헤더에 토큰 추가
+        },
+      })
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+      });
+  }, []);
 
   const handleProjectLike = () => {
     navigate("/like/project");
@@ -16,7 +38,11 @@ function LikeProject() {
     navigate("/like/recruitment");
   };
 
-  const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
+  const handleToProjectLink = (bno) => {
+    navigate(`/project/read/${bno}`);
+  };
+
+  const projectCards = projects.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.projectDescription} category={project.category} boardLike={project.boardLike} imageUrl={project.projectImage} onClick={() => handleToProjectLink(project.bno)} />);
 
   return (
     <div className="page">
