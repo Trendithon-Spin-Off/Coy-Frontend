@@ -11,6 +11,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 
 const Read = () => {
+  const [likes, setLikes] = useState(0);
+  const [memberId, setmemberId] = useState("");
   const [project, setProject] = useState(null); // 단일 게시글을 저장할 상태
   const navigate = useNavigate();
   const { bno } = useParams();
@@ -35,13 +37,32 @@ const Read = () => {
     return <p>Loading...</p>;
   }
   //좋아요
+  const requestData = {
+    memberId: memberId,
+    bno: { bno },
+  };
+  console.log("requestData:", requestData);
+
   const handleLike = () => {
+    // 로컬 스토리지에서 memberId 가져오기
+    const storedMemberId = localStorage.getItem("memberId");
+
+    // requestData 객체 생성
+    const requestData = {
+      memberId: storedMemberId,
+      bno: bno,
+    };
+
     axios
-      .post(`${API_BASE_URL}/api/board/like/${bno}`)
+      .put(`${API_BASE_URL}/board/like`, requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
-        // 좋아요가 성공적으로 처리되었을 때 클라이언트에서 할 일
-        console.log("Like submitted successfully!");
-        // 이후 필요한 작업 수행
+        console.log("좋아요 +1");
+        // 서버에서 좋아요 수를 업데이트한 후에 클라이언트에서 상태를 업데이트
+        setLikes(likes + 1);
       })
       .catch((error) => {
         console.error("Error submitting like:", error);
@@ -75,26 +96,26 @@ const Read = () => {
               <div className="project-explanation-label">
                 <label>✍🏻 프로젝트 한줄 소개</label>
                 <div className="project-explanation-content">
-                  {project.description}
+                  {project.projectDescription}
                 </div>
               </div>
               <div className="project-explanation-label">
                 <label>🧾 프로젝트 제작 배경</label>
                 <div className="project-explanation-content">
-                  {project.projBackground}
+                  {project.projectBackground}
                 </div>
               </div>
               <div className="project-explanation-label">
                 <label>🦾 프로젝트 주요 기능과 특징</label>
                 <div className="project-explanation-content">
-                  {project.mainFeature}
+                  {project.projectFeatures}
                 </div>
               </div>
             </Col>
             <Col style={{ width: "50%" }}>
               <p>Likes: {project.boardLike}</p>
               <div className="project-main-img">
-                <img src={project.imageUrl} alt="Project" />
+                <img src={project.projectImage} alt="Project" />
               </div>
             </Col>
           </Row>
@@ -107,7 +128,7 @@ const Read = () => {
                 <div className="project-url-label">
                   <label>🔗 프로젝트 배포 URL</label>
                   <button
-                    onClick={() => window.open(project.projUrl)}
+                    onClick={() => window.open(project.distribution)}
                     className="project-link-button"
                   >
                     바로가기
@@ -121,7 +142,7 @@ const Read = () => {
                     프로젝트 Github
                   </label>
                   <button
-                    onClick={() => window.open(project.githubUrl)}
+                    onClick={() => window.open(project.github)}
                     className="project-link-button"
                   >
                     바로가기
@@ -141,7 +162,7 @@ const Read = () => {
         </div>
       </div>
       <div className="project-like-container">
-        <button className="project-read-like">
+        <button className="project-read-like" onClick={handleLike}>
           <CiHeart className="project-like" /> 프로젝트 좋아요
         </button>
       </div>

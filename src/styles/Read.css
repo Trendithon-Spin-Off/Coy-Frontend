@@ -102,3 +102,11 @@
 .category-part p {
   margin: 0; /* 기본 마진 제거 */
 }
+
+.like-img {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  color: #898989;
+  margin-right: 10px;
+}
