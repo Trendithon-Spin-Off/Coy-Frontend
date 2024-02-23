@@ -16,7 +16,7 @@ function SearchProject() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/project/search/list?&searchKeyword=${searchData}`);
+        const response = await axios.get(`${API_BASE_URL}/project/search/list?&searchKeyword=${searchData}`);
         setSearchResults(response.data.content);
       } catch (error) {
         console.error("Error fetching search results:", error);
