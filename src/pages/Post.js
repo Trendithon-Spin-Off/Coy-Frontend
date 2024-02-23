@@ -16,13 +16,13 @@ import Footer from "../components/Footer";
 
 const uploadToS3 = async (file) => {
   const s3 = new AWS.S3({
-    accessKeyId: "YOUR_ACCESS_KEY_ID",
-    secretAccessKey: "YOUR_SECRET_ACCESS_KEY",
-    region: "YOUR_REGION",
+    accessKeyId: "AKIAZBAE57CCNJHI72ZY",
+    secretAccessKey: "RAuQr33yfNzkQJgr5JPDY1fBCpBYCblZbk3RuRil",
+    region: "ap-northeast-2",
   });
 
   const params = {
-    Bucket: "YOUR_BUCKET_NAME",
+    Bucket: "trendithonfile",
     Key: file.name,
     Body: file,
     ACL: "public-read",
