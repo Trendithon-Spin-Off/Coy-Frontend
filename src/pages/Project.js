@@ -65,11 +65,11 @@ function Project() {
 
   // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
   // const BurnprojectCards = Array.from({ length: 7 }, (_, index) => <Card_Burn_Project key={index} />);
-  const projectCards = projects.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectCards = projects.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />);
 
   const BurnprojectCards = popularProjects.map((project) => (
     <SwiperSlide key={project.bno}>
-      <Card_Burn_Project projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />
+      <Card_Burn_Project projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />
     </SwiperSlide>
   ));
 
