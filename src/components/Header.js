@@ -17,7 +17,7 @@ const DropdownContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 145px;
-  top: 125%;
+  top: 55px;
   right: 0;
   display: ${(props) => (props.isVisible ? "flex" : "none")};
   flex-direction: column;
@@ -57,9 +57,23 @@ const DropdownItem = styled.div`
   }
 `;
 
+const DropdownBellContainer = styled.div`
+  z-index: 2;
+  position: absolute;
+  width: 370px;
+  height: 395px;
+  top: 50.5px;
+  right: 0;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0.1, 0.1, 0.1, 0.2);
+`;
+
 function Header() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const bellDropdownRef = useRef(null);
 
   const handleNavLinkClick = (path) => {
     navigate(path);
@@ -134,6 +148,7 @@ function Header() {
 
   // 드롭다운 관련 코드
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isBellDropdownVisible, setBellDropdownVisible] = useState(false);
 
   const handleMenuClick = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -143,6 +158,24 @@ function Header() {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleBellMenuClick = () => {
+    setBellDropdownVisible(!isBellDropdownVisible);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (bellDropdownRef.current && !bellDropdownRef.current.contains(event.target)) {
+        setBellDropdownVisible(false);
       }
     };
 
@@ -171,8 +204,43 @@ function Header() {
         </div>
         {isLoggedIn ? (
           <div className="login-user">
-            <div className="img-bell">
+            <div className="img-bell" onClick={handleBellMenuClick} style={{ position: "relative" }} ref={bellDropdownRef}>
               <img src={bell} alt="알람창" style={{ cursor: "pointer" }} />
+              {isBellDropdownVisible && (
+                <DropdownBellContainer isVisible={isBellDropdownVisible}>
+                  <div className="bell-title">알림</div>
+                  <div className="bell-list">
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                    <div className="bell-content">
+                      <img src={defalut} alt="프로필 사진" />
+                      <p>nnn 님이 프로젝트 'nnnnnnn'를 좋아합니다.</p>
+                    </div>
+                  </div>
+                </DropdownBellContainer>
+              )}
             </div>
             <div className="img-profile" onClick={handleMenuClick} style={{ position: "relative" }} ref={dropdownRef}>
               <img src={defalut} alt="내 프로필" style={{ cursor: "pointer" }} />
