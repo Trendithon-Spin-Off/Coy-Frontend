@@ -1,4 +1,6 @@
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card_Profile_Project from "../components/Card_Profile_Project";
@@ -7,14 +9,50 @@ import Default from "../img/NonProfile.png";
 
 import "../styles/Profile.css";
 
+const API_BASE_URL = "https://likelion-running.store/api";
+
 function Profile() {
+  const { memberId } = useParams();
+  const [name, setUserName] = useState("");
+  const [job, setJob] = useState("");
+  const [specificDuty, setSpecificDuty] = useState("");
+  const [technics, setTechnics] = useState([]);
+  const [introduce, setIntroduce] = useState("");
+  const [link, setLink] = useState("");
+  const [projects, setProjects] = useState([]);
+  // const [memberId, setMemberId] = useState("");
+  const [imageUrl, setProfileImage] = useState("");
+
   const navigate = useNavigate();
 
   const handleChat = () => {
     navigate("/chat");
   };
 
-  const projectProfileCards = Array.from({ length: 10 }, (_, index) => <Card_Profile_Project key={index} />);
+  useEffect(() => {
+    axios
+      .get(`${API_BASE_URL}/information/check/${memberId}`)
+      .then((response) => {
+        const userData = response.data;
+        setUserName(userData.name);
+        setIntroduce(userData.introduce);
+        setJob(userData.job);
+        setSpecificDuty(userData.specificDuty);
+        setTechnics(userData.technics);
+        setLink(userData.link);
+        setProfileImage(userData.imageUrl);
+        setProjects(userData.boards);
+      })
+      .catch((error) => {
+        console.error("Error fetching project details:", error);
+      });
+  }, [memberId]);
+
+  const projectProfileCards = projects.map((project) => <Card_Profile_Project key={project.bno} projectName={project.projectName} description={project.projectDescription} category={project.category} boardLike={project.boardLike} imageUrl={project.projectImage} onClick={() => handleToProjectLink(project.bno)} />);
+
+  const handleToProjectLink = (bno) => {
+    navigate(`/project/read/${bno}`);
+  };
 
   return (
     <div className="page">
@@ -25,17 +63,17 @@ function Profile() {
             <div className="Profile-profile-content">
               <div className="Profile-profile-space">
                 <div className="Profile-profile-img">
-                  <img src={Default} alt="프로필 이미지" />
+                  <img src={imageUrl || Default} alt="프로필 이미지" />
                 </div>
               </div>
               <div className="Profile-profile-space">
                 <p div className="Profile-profile-name">
-                  이름
+                  {name}
                 </p>
               </div>
               <div className="Profile-profile-space">
                 <p div className="Profile-profile-description">
-                  한줄소개한줄소개한줄소개한줄소개한줄소개한줄소개
+                  {introduce}
                 </p>
               </div>
               <div className="Profile-profile-job">
@@ -44,10 +82,10 @@ function Profile() {
                 </p>
                 <div className="Profile-profile-text-list">
                   <p div className="Profile-profile-text">
-                    프론트엔드
+                    {job}
                   </p>
                   <p div className="Profile-profile-text">
-                    웹퍼블리셔
+                    {specificDuty}
                   </p>
                 </div>
               </div>
@@ -57,15 +95,16 @@ function Profile() {
                 </p>
                 <div className="Profile-profile-text-list-box">
                   <div className="Profile-profile-text-list">
-                    <p div className="Profile-profile-text">
-                      JavaScript
-                    </p>
-                    <p div className="Profile-profile-text">
-                      CSS
-                    </p>
-                    <p div className="Profile-profile-text">
-                      HTML
-                    </p>
+                    {technics.map(
+                      (
+                        technic,
+                        index // technics 표시
+                      ) => (
+                        <p key={index} div className="Profile-profile-text">
+                          {technic}
+                        </p>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -73,14 +112,14 @@ function Profile() {
                 <p div className="Profile-profile-title">
                   Link
                 </p>
-                <Link to="#">
+                <Link to={link}>
                   <p div className="Profile-profile-text">
-                    https://
+                    {link}
                   </p>
                 </Link>
               </div>
               <div className="Profile-profile-space">
-                <div className="Profile-profile-chat-btn" onClick={handleChat}>
+                <div className="Profile-profile-chat-btn">
                   <p>1:1 채팅</p>
                 </div>
               </div>

@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
 
           {/* 프로필 조회 */}
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile/:memberId" element={<Profile />} />
           <Route exact path="/mypage" element={<MyPage />} />
 
           {/* 좋아요한 프로젝트, 채용 공고 */}

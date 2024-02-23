@@ -71,6 +71,10 @@ const Read = () => {
 
   //...
 
+  const handleToProfileLink = (memberId) => {
+    navigate(`/profile/${memberId}`);
+  };
+
   <button className="project-read-like" onClick={handleLike}>
     <CiHeart className="project-like" /> 프로젝트 좋아요
   </button>;
@@ -79,37 +83,26 @@ const Read = () => {
       <Header />
       <div className="content">
         <Container className="proj-explanation">
-          <Row
-            style={{ cursor: "pointer" }}
-            className="justify-content-md-center"
-          >
+          <Row style={{ cursor: "pointer" }} className="justify-content-md-center">
             <Col style={{ width: "50%" }}>
               <div className="category-part">
-                <p>{project.category}</p>
+                <p>{project.category || "미선택"}</p>
               </div>
               <div className="project-explanation-label">
                 <label> 💡 프로젝트 이름</label>
-                <div className="project-explanation-content">
-                  {project.projectName}
-                </div>
+                <div className="project-explanation-content">{project.projectName || "미작성"}</div>
               </div>
               <div className="project-explanation-label">
                 <label>✍🏻 프로젝트 한줄 소개</label>
-                <div className="project-explanation-content">
-                  {project.projectDescription}
-                </div>
+                <div className="project-explanation-content">{project.projectDescription || "미작성"}</div>
               </div>
               <div className="project-explanation-label">
                 <label>🧾 프로젝트 제작 배경</label>
-                <div className="project-explanation-content">
-                  {project.projectBackground}
-                </div>
+                <div className="project-explanation-content">{project.projectBackground || "미작성"}</div>
               </div>
               <div className="project-explanation-label">
                 <label>🦾 프로젝트 주요 기능과 특징</label>
-                <div className="project-explanation-content">
-                  {project.projectFeatures}
-                </div>
+                <div className="project-explanation-content">{project.projectFeatures || "미작성"}</div>
               </div>
             </Col>
             <Col style={{ width: "50%" }}>
@@ -127,10 +120,7 @@ const Read = () => {
               <Col md={4}>
                 <div className="project-url-label">
                   <label>🔗 프로젝트 배포 URL</label>
-                  <button
-                    onClick={() => window.open(project.distribution)}
-                    className="project-link-button"
-                  >
+                  <button onClick={() => window.open(project.distribution)} className="project-link-button">
                     바로가기
                   </button>
                 </div>
@@ -141,10 +131,7 @@ const Read = () => {
                     <IoLogoGithub />
                     프로젝트 Github
                   </label>
-                  <button
-                    onClick={() => window.open(project.github)}
-                    className="project-link-button"
-                  >
+                  <button onClick={() => window.open(project.github)} className="project-link-button">
                     바로가기
                   </button>
                 </div>
@@ -152,9 +139,31 @@ const Read = () => {
               <Col md={4}>
                 <div className="project-url-label">
                   <label>👥 함께한 팀원</label>
-                  <div className="member-id">
-                    <span>{project.member1}</span> {/* 팀원 이름 표시 */}
-                  </div>
+                  {project.member1 && (
+                    <div className="member-id" style={{ cursor: "pointer" }} onClick={() => handleToProfileLink(project.member1)}>
+                      <span>{project.member1}</span>
+                    </div>
+                  )}
+                  {project.member2 && (
+                    <div className="member-id" style={{ marginTop: "5px", cursor: "pointer" }} onClick={() => handleToProfileLink(project.member2)}>
+                      <span>{project.member2}</span>
+                    </div>
+                  )}
+                  {project.member3 && (
+                    <div className="member-id" style={{ marginTop: "5px", cursor: "pointer" }} onClick={() => handleToProfileLink(project.member3)}>
+                      <span>{project.member3}</span>
+                    </div>
+                  )}
+                  {project.member4 && (
+                    <div className="member-id" style={{ marginTop: "5px", cursor: "pointer" }} onClick={() => handleToProfileLink(project.member4)}>
+                      <span>{project.member4}</span>
+                    </div>
+                  )}
+                  {project.member5 && (
+                    <div className="member-id" style={{ marginTop: "5px", cursor: "pointer" }} onClick={() => handleToProfileLink(project.member5)}>
+                      <span>{project.member5}</span>
+                    </div>
+                  )}
                 </div>
               </Col>
             </Row>
