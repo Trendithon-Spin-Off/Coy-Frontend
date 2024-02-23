@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "../styles/Card_Burn_Recruitment.css";
@@ -8,19 +8,21 @@ import Vector from "../img/Vector.png";
 import whitelove from "../img/whitelove.png";
 import whitefilllove from "../img/whitefilllove.png";
 
-
 function Card_Burn_Recruitment({ job }) {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const [viewCount, setViewCount] = useState(job.viewCount);
 
-  if (!job || job.viewCount === undefined || job.likeCount === undefined) {
-    return <div>Loading...</div>;
-  }
+  const memberId = localStorage.getItem('memberId');
 
-  const handleToProjectLink = () => {
-    navigate(`/job/${job.id}`);
-  };
+  useEffect(() => {
+    const memberId = localStorage.getItem('memberId');
+    if (memberId) {
+      const likedJobs = JSON.parse(localStorage.getItem(`likedJobs_${memberId}`)) || {};
+      const jobLiked = likedJobs[job.id] || false;
+      setLiked(jobLiked);
+    }
+  }, [job.id]);
 
   const API_BASE_URL = 'https://likelion-running.store/api';
 
@@ -43,6 +45,10 @@ function Card_Burn_Recruitment({ job }) {
     }
   };
 
+  const handleToProjectLink = () => {
+    navigate(`/job/${job.id}`);
+  };
+
   const formatDeadline = (deadline) => {
     const deadlineDate = new Date(deadline);
     const now = new Date();
@@ -51,15 +57,65 @@ function Card_Burn_Recruitment({ job }) {
     return daysLeft >= 0 ? `D-${daysLeft}` : "기간 만료";
   };
 
-  const toggleLike = () => {
-    setLiked(!liked);
+  const toggleLike = async () => {
+    const memberId = localStorage.getItem('memberId');
+    if (!memberId) return;
+
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        memberId: memberId,
+        jobPostingId: job.id,
+      }
+    };
+
+    try {
+      let response;
+      if (!liked) {
+        response = await axios.put(`${API_BASE_URL}/job/like`, config.data, { headers: config.headers });
+      } else {
+        response = await axios.delete(`${API_BASE_URL}/job/unlike`, config);
+      }
+
+      if (response.data.success) {
+        const newLikedState = !liked;
+        setLiked(newLikedState);
+
+        const likedJobs = JSON.parse(localStorage.getItem(`likedJobs_${memberId}`)) || {};
+        likedJobs[job.id] = newLikedState;
+        localStorage.setItem(`likedJobs_${memberId}`, JSON.stringify(likedJobs));
+      } else {
+        console.error("좋아요 처리 실패:", response.data.message);
+      }
+    } catch (error) {
+      console.error("좋아요 처리 중 에러 발생:", error.response ? error.response.data : error);
+    }
   };
+  const handleLogout = () => {
+    const memberId = localStorage.getItem('memberId');
+  
+    if (memberId) {
+      localStorage.removeItem(`likedJobs_${memberId}`);
+    }
+  
+    localStorage.removeItem('memberId');
+    localStorage.removeItem('token');
+  
+    navigate('/'); 
+
+    window.location.reload();
+  };
+
+  if (!job || job.viewCount === undefined || job.likeCount === undefined) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div className="Card_Burn_Recruitment" style={{ cursor: "pointer" }} onClick={increaseViewCountAndNavigate}>
       <div className="Card_Burn_Recruitment-content">
         <div className="Card_Burn_Recruitment-looklike">
-          <img src={liked ? whitefilllove : whitelove} alt="좋아요" className="like-icon" onClick={(e) => {e.stopPropagation(); toggleLike();}} />
+        <img src={liked ? whitefilllove : whitelove} alt="좋아요" className="like-icon" onClick={(e) => {e.stopPropagation(); toggleLike();}} />
           <div className="Card_Burn_Recruitment-look">
             <img src={Look} alt="조회수" />
             <p>{viewCount.toLocaleString()}</p>

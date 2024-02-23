@@ -191,7 +191,7 @@ function MyPage() {
   const stackOptions = ["JavaScript", "TypeScript", "React", "Vue", "Nodejs", "Spring", "Java", "Nextjs", "Nestjs", "Express", "Go", "C", "Python", "Django", "Swift", "Kotlin", "MySQL", "MongoDB", "php", "GraphQL", "Firebase", "ReactNative", "Unity", "Flutter", "AWS", "Kubernetes", "Docker", "Git", "Figma", "Zeplin"];
 
   // const projectProfileCards = Array.from({ length: 10 }, (_, index) => <Card_Profile_Project key={index} />);
-  const projectProfileCards = projects.map((project) => <Card_Profile_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectProfileCards = projects.map((project) => <Card_Profile_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />);
 
   const handleToProjectLink = (bno) => {
     navigate(`/project/read/${bno}`);

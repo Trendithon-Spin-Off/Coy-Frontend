@@ -83,6 +83,7 @@ function Project() {
         description={project.description}
         category={project.category}
         boardLike={project.boardLike}
+        imageUrl={project.imageUrl}
         onClick={() => handleToProjectLink(project.bno)}
       />
     </SwiperSlide>

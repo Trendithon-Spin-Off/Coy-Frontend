@@ -16,7 +16,7 @@ function SearchProject() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/project/search/list?&searchKeyword=${searchData}`);
+        const response = await axios.get(`${API_BASE_URL}/project/search/list?&searchKeyword=${searchData}`);
         setSearchResults(response.data.content);
       } catch (error) {
         console.error("Error fetching search results:", error);
@@ -47,7 +47,7 @@ function SearchProject() {
   };
 
   // const projectCards = Array.from({ length: 10 }, (_, index) => <Card_Project key={index} />);
-  const projectCards = searchResults.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} onClick={() => handleToProjectLink(project.bno)} />);
+  const projectCards = searchResults.map((project) => <Card_Project key={project.bno} projectName={project.projectName} description={project.description} category={project.category} boardLike={project.boardLike} imageUrl={project.imageUrl} onClick={() => handleToProjectLink(project.bno)} />);
 
   return (
     <div className="page">

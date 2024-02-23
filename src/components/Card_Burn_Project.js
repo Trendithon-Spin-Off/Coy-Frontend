@@ -7,11 +7,11 @@ import Like from "../img/like.png";
 import Arrow from "../img/arrow.png";
 import Default from "../img/NonProject.png";
 
-function Card_Burn_Project({ projectName, description, category, boardLike, onClick }) {
+function Card_Burn_Project({ projectName, description, category, boardLike, imageUrl, onClick }) {
   return (
     <div className="Card-Burn-Project" onClick={onClick} style={{ cursor: "pointer" }}>
       <div className="Card-Burn-img">
-        <img src={Default} alt="프로젝트 이미지" />
+        <img src={imageUrl || Default} alt="프로젝트 이미지" />
       </div>
       <div className="Card-Burn-Project-common">
         <div className="Card-Burn-Project-looklike">
@@ -23,11 +23,11 @@ function Card_Burn_Project({ projectName, description, category, boardLike, onCl
 
         <div className="Card-Project-content-texts">
           <div className="Card-Burn-Project-category">
-            <p>{category}</p>
+            <p>{category || "미선택"}</p>
           </div>
           <div className="Card-Burn-Project-text">
-            <p className="Card-Burn-Project-title">{projectName}</p>
-            <p className="Card-Burn-Project-description">{description}</p>
+            <p className="Card-Burn-Project-title">{projectName || "미작성"}</p>
+            <p className="Card-Burn-Project-description">{description || "미작성"}</p>
           </div>
         </div>
       </div>
