@@ -105,16 +105,8 @@ function SearchRecruitment() {
   <div className="Search-list-cards">
     {jobs.map((job) => (
       <CardRecruitment
-        key={job.id}
-        logoUrl={job.logoUrl}
-        companyName={job.companyName}
-        viewCount={job.viewCount}
-        applicantsCount={job.applicantsCount}
-        jobTitle={job.jobTitle}
-        type={job.type}
-        deadLine={job.deadLine}
-        level={job.level}
-        likeCount={job.likeCount}
+      key={job.id}
+      job={job}
       />
     ))}
   </div>

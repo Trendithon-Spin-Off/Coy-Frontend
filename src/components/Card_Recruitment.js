@@ -11,16 +11,19 @@ import Vector from "../img/Vector.png";
 function CardRecruitment({ job }) {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const [viewCount, setViewCount] = useState(job.viewCount);
+  const [viewCount, setViewCount] = useState(job?.viewCount ?? 0);
 
   useEffect(() => {
+    // job이 undefined일 경우 early return을 사용하여 처리합니다.
+    if (!job) return;
+    
     const memberId = localStorage.getItem('memberId');
     if (memberId) {
       const likedJobs = JSON.parse(localStorage.getItem(`likedJobs_${memberId}`)) || {};
       const jobLiked = likedJobs[job.id] || false;
       setLiked(jobLiked);
     }
-  }, [job.id]);
+  }, [job]); 
 
   const API_BASE_URL = 'https://likelion-running.store/api';
 
